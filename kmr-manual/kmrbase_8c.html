@@ -217,6 +217,9 @@ static long&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_count_entr
 <tr class="memitem:a562467c4832bfdb13027976e7eb9c5bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structkmr__ctx.html">KMR</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrbase_8c.html#a562467c4832bfdb13027976e7eb9c5bf">kmr_create_context</a> (const MPI_Comm comm, const MPI_Info conf, const char *identifying_name)</td></tr>
 <tr class="memdesc:a562467c4832bfdb13027976e7eb9c5bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a new KMR context (a context has type KMR).  <a href="#a562467c4832bfdb13027976e7eb9c5bf">More...</a><br /></td></tr>
 <tr class="separator:a562467c4832bfdb13027976e7eb9c5bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51dc9d6d0e35888434faa4c239c87dcd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51dc9d6d0e35888434faa4c239c87dcd"></a>
+<a class="el" href="structkmr__ctx.html">KMR</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_create_context_world</b> ()</td></tr>
+<tr class="separator:a51dc9d6d0e35888434faa4c239c87dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade6559203d1471e48688314ba729758a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrbase_8c.html#ade6559203d1471e48688314ba729758a">kmr_create_kvs7</a> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr, enum <a class="el" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> kf, enum <a class="el" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> vf, struct <a class="el" href="structkmr__option.html">kmr_option</a> opt, const char *file, const int line, const char *func)</td></tr>
 <tr class="memdesc:ade6559203d1471e48688314ba729758a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a new key-value stream with the specified field data-types.  <a href="#ade6559203d1471e48688314ba729758a">More...</a><br /></td></tr>
 <tr class="separator:ade6559203d1471e48688314ba729758a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -337,12 +340,6 @@ Variables</h2></td></tr>
 <tr class="memitem:a8d55d5605bb8f808adde62ed9521d3b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d55d5605bb8f808adde62ed9521d3b8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>KMR_API_ID</b> = 0</td></tr>
 <tr class="separator:a8d55d5605bb8f808adde62ed9521d3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dda15b8ea086dbd926930060a7b3ac9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dda15b8ea086dbd926930060a7b3ac9"></a>
-char *const&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_date</b> = KMR_DATE</td></tr>
-<tr class="separator:a9dda15b8ea086dbd926930060a7b3ac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace1c0f603fe7ae08922ce57ae2e997f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace1c0f603fe7ae08922ce57ae2e997f6"></a>
-char *const&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_rev</b> = KMR_REV</td></tr>
-<tr class="separator:ace1c0f603fe7ae08922ce57ae2e997f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88e13852b4131896b618aa499b77548d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88e13852b4131896b618aa499b77548d"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> = KMR_H</td></tr>
 <tr class="separator:a88e13852b4131896b618aa499b77548d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -405,7 +402,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 
 <p>Clears the environment. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00125">125</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00123">123</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -442,7 +439,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Makes a new KMR context (a context has type KMR). </p>
 <p>A KMR context is a record of common information to all key-value streams. COMM is a communicator for use inside. It dups the given communicator inside, to avoid conflicts with other calls to MPI functions. MPI should be initialized with a thread support level of either MPI_THREAD_SERIALIZED or MPI_THREAD_MULTIPLE. CONF specifies configuration options. It should be freed after a call. The options can differ on each rank, (in this version). The configuration options are first taken from a file with a name specified by the environment variable "KMROPTION" on rank0, and they are merged with the explicitly given ones. The KMROPTION file has the file format of Java properties (but only in Latin characters). Refer to JDK documents on "java.util.Properties" (on "load" method) for the file format. The explicitly given ones have precedence. IDENTIFYING_NAME is just recorded in the context, and has no specific use. It may be null. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00148">148</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00146">146</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -462,7 +459,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 
 <p>Releases a context created with <a class="el" href="kmrbase_8c.html#a562467c4832bfdb13027976e7eb9c5bf" title="Makes a new KMR context (a context has type KMR). ">kmr_create_context()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00310">310</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00316">316</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -501,7 +498,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Makes a new key-value stream (type KMR_KVS). </p>
 <p>It allocates by the size of the union, which may be larger than the necessary. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00403">403</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00409">409</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -561,7 +558,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 
 <p>Makes a new key-value stream with the specified field data-types. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00495">495</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00501">501</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -598,7 +595,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Moves the contents of the input KVI to the output KVO. </p>
 <p>It consumes the input KVI. Calling <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a> with a null map-function has the same effect. Effective-options: TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00519">519</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00525">525</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -619,7 +616,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Releases a key-value stream (type KMR_KVS). </p>
 <p>Normally, mapper/shuffler/reducer consumes and frees the input key-value stream, and explicit calls are unnecessary. Here, mapper/shuffler/reducer includes <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>, <a class="el" href="kmrbase_8c.html#ab58641ce4b8c06e61f3e21606b7fed36" title="Maps on rank0 only. ">kmr_map_on_rank_zero()</a>, <a class="el" href="kmr_8h.html#a9d52c3c69250bf19dd28d5e38809df79" title="Maps in master-slave mode. ">kmr_map_ms()</a>, <a class="el" href="kmrbase_8c.html#a194686701b3c46a869fe9eb2cab93252" title="Shuffles key-value pairs to the appropriate destination ranks. ">kmr_shuffle()</a>, <a class="el" href="kmrbase_8c.html#a64d9a689d79d64bcfa10d61c1d335ee7" title="Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gat...">kmr_replicate()</a>, <a class="el" href="kmr_8h.html#ae06cb9083e42011c9fa019add7bc228f" title="Reduces key-value pairs. ">kmr_reduce()</a>, and <a class="el" href="kmrbase_8c.html#a875e0b3ce874d08f5778854dc21eb70a" title="Calls a reduce-function once as if all key-value pairs had the same key. ">kmr_reduce_as_one()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00604">604</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00612">612</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -650,7 +647,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Adds a key-value pair. </p>
 <p>(It is with serialization when a map-function is threaded). </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00734">734</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00742">742</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -699,7 +696,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Adds a key-value pair as given directly by a pointer. </p>
 <p>An integer or a double be passed by a pointer (thus like &amp;v). </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00762">762</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00770">770</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -742,7 +739,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Adds a key-value pair, but only allocates a space and returns the pointers to the key and the value parts. </p>
 <p>It may enable to create a large key/value data directly in the space. It does not return a proper value if a key/value field is not a pointer. (It cannot be used with a "push-off" key-value stream, because its buffer will be sent out and late fill-in the buffer causes a race). </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00824">824</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00834">834</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -763,7 +760,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Marks finished adding key-value pairs. </p>
 <p>Further addition will be prohibited. Normally, mapper/shuffler/reducer finishes the output key-value stream by itself, and explicit calls are unnecessary. Here, mapper/shuffler/reducer includes <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>, <a class="el" href="kmrbase_8c.html#ab58641ce4b8c06e61f3e21606b7fed36" title="Maps on rank0 only. ">kmr_map_on_rank_zero()</a>, <a class="el" href="kmr_8h.html#a9d52c3c69250bf19dd28d5e38809df79" title="Maps in master-slave mode. ">kmr_map_ms()</a>, <a class="el" href="kmrbase_8c.html#a194686701b3c46a869fe9eb2cab93252" title="Shuffles key-value pairs to the appropriate destination ranks. ">kmr_shuffle()</a>, <a class="el" href="kmrbase_8c.html#a64d9a689d79d64bcfa10d61c1d335ee7" title="Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gat...">kmr_replicate()</a>, and <a class="el" href="kmr_8h.html#ae06cb9083e42011c9fa019add7bc228f" title="Reduces key-value pairs. ">kmr_reduce()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00862">862</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00872">872</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -800,7 +797,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Adds a key-value pair of strings. </p>
 <p>The key and value fields should be of opaque data. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00894">894</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00904">904</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -849,7 +846,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Adds a given key-value pair unmodified. </p>
 <p>It is a map-function. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00916">916</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00928">928</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -892,7 +889,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Packs locally the contents of a key-value stream to a byte array. </p>
 <p>It is used to save or to send a key-value stream. It returns the allocated memory with its size, and it should be freed by the user. It may fail on allocating a buffer, and then it returns MPI_ERR_BUFFER. Its reverse is performed by <a class="el" href="kmrbase_8c.html#a8ab6a2480c2159719a697627e1fb4d00" title="Unpacks locally the contents of a key-value stream from a byte array. ">kmr_restore_kvs()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00947">947</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l00959">959</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -935,7 +932,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Unpacks locally the contents of a key-value stream from a byte array. </p>
 <p>It is a reverse of <a class="el" href="kmrbase_8c.html#a3923c00210d6e66c02fc718633fe96d7" title="Packs locally the contents of a key-value stream to a byte array. ">kmr_save_kvs()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01012">1012</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01025">1025</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1008,7 +1005,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Maps by skipping the number of entries. </p>
 <p>It calls a map-function on entries from FROM, skipping by STRIDE, up to LIMIT non-inclusive. See <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01111">1111</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01125">1125</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1079,9 +1076,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 </div><div class="memdoc">
 
 <p>Maps simply. </p>
-<p>It consumes the input key-value stream KVI unless INSPECT option is marked. The output key-value stream KVO can be null, but in that case, a map-function cannot add key-value pairs. The pointer ARG is just passed to a map-function as a general argument, where accesses to it should be race-free, since a map-function is called by threads by default. M is the map-function. See the description on the type <a class="el" href="kmr_8h.html#a710ca6341d4cbe82f7e62d0f63c19ebb" title="Map-function Type. ">kmr_mapfn_t</a>. It copeis the contents of the input KVI to the output KVO, when a map-function is null. During processing, it first makes an array pointing to the key-value entries in each data block, and works on it for ease threading/parallelization. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
+<p>It consumes the input key-value stream KVI unless INSPECT option is marked. The output key-value stream KVO can be null, but in that case, a map-function cannot add key-value pairs. The pointer ARG is just passed to a map-function as a general argument, where accesses to it should be race-free, since a map-function is called by threads by default. M is the map-function. See the description on the type <a class="el" href="kmr_8h.html#a710ca6341d4cbe82f7e62d0f63c19ebb" title="Map-function Type. ">kmr_mapfn_t</a>. It copeis the contents of the input KVI to the output KVO, when a map-function is null. During processing, it first makes an array pointing to the key-value entries in each data block, and works on it for ease threading/parallelization. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN, COLLAPSE, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01265">1265</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01280">1280</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1130,7 +1127,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Maps sequentially with rank by rank for debugging. </p>
 <p>See kmr_map. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01297">1297</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01316">1316</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1161,7 +1158,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>Extracts a single key-value pair locally in the key-value stream KVI. </p>
 <p>It is an error when zero or more than one entries are in the KVI. It does not consume the input KVS (INSPECT IMPLIED). </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01325">1325</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01344">1344</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1208,9 +1205,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 </div><div class="memdoc">
 
 <p>Maps once. </p>
-<p>It calls a map-function once with a dummy key-value stream and a dummy key-value pair. See <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>. </p>
+<p>It calls a map-function once with a dummy key-value stream and a dummy key-value pair. See <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>. Effective-options: KEEP_OPEN, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01356">1356</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01376">1376</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1251,9 +1248,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 </div><div class="memdoc">
 
 <p>Maps on rank0 only. </p>
-<p>It calls a map-function once with a dummy key-value stream and a dummy key-value pair. It is used to avoid low-level conditionals like (myrank==0). See <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>. </p>
+<p>It calls a map-function once with a dummy key-value stream and a dummy key-value pair. It is used to avoid low-level conditionals like (myrank==0). See <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a>. Effective-options: KEEP_OPEN, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01397">1397</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01422">1422</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1291,7 +1288,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 
 <p>Compares the key field of keyed-records for qsort/bsearch. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01752">1752</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01781">1781</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1335,7 +1332,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_version</b> 
 <p>It sorts pairs when SHUFFLING is false, or gathers pairs with the same hashed keys adjacent when SHUFFLING is true. It only respects for not ordering but just equality when shuffling. The sort-keys for shuffling are destination ranks for shuffling (taking a modulo of the hashed key with nprocs). As a sorting, it is NOT-STABLE due to quick-sort used inside. It converts pointer keys and values to opaque ones for sending.<br />
 Sorting on a key-value stream is by memcmp(), unless the keys are integer or floating-point numbers (ordering on integers and memcmp() are different). Sorting on non-numbers is performed in two steps: the first step sorts by the integer rankings, and the second by the specified comparator. And thus, the comparator is required to have a corresponding generator of integer rankings. It consumes the input key-value stream. Effective-options: NOTHREADING, INSPECT, KEY_AS_RANK. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01920">1920</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01949">1949</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1370,9 +1367,9 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 </div><div class="memdoc">
 
 <p>Shuffles key-value pairs to the appropriate destination ranks. </p>
-<p>It first sorts pairs by the destination ranks of the keys, and then exchanges pairs with all-to-all communication. It converts pointer keys and values to opaque ones for sending during the sorting stage. Note that the key-value pairs are sorted by the hash-values prior to exchange. Effective-options: KEY_AS_RANK, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
+<p>It first sorts pairs by the destination ranks of the keys, and then exchanges pairs with all-to-all communication. It converts pointer keys and values to opaque ones for sending during the sorting stage. Note that the key-value pairs are sorted by the hash-values prior to exchange. Effective-options: INSPECT, KEY_AS_RANK, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01961">1961</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l01992">1992</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1409,7 +1406,7 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gather. </p>
 <p>It gathers pairs on rank0 only by the option RANK_ZERO. It moves stably, keeping the ordering of ranks and the ordering of local key-value pairs. Effective-options: INSPECT, RANK_ZERO, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02098">2098</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02127">2127</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1482,7 +1479,7 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Reduces key-value pairs. </p>
 <p>It does not include shuffling, and thus, it requires being preceded by shuffling. Or, it works on local data (as a local combiner), if it is not preceded by shuffling. It always consumes the input key-value stream KVI. An output key-value stream KVO can be null. It passes an array of key-value pairs to a reduce-function whose keys are all equal (equality is by bits). The pointer ARG is just passed to a reduce-function as a general argument, where accesses to it should be race-free, since a reduce-function is called by threads by default. R is a reduce-function. See the description on the type <a class="el" href="kmr_8h.html#af4e0b7a58968aad22188408a00131760" title="Reduce-function Type. ">kmr_redfn_t</a>. A reduce-function may see a different input key-value stream (internally created one) instead of the one given. During reduction, it first scans adjacent equal keys, then calls a given reduce-function. Effective-options: NOTHREADING, INSPECT, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02450">2450</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02482">2482</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1531,7 +1528,7 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Calls a reduce-function once as if all key-value pairs had the same key. </p>
 <p>See <a class="el" href="kmr_8h.html#ae06cb9083e42011c9fa019add7bc228f" title="Reduces key-value pairs. ">kmr_reduce()</a>. Effective-options: INSPECT, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02513">2513</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02547">2547</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1574,7 +1571,7 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Concatenates a number of KVSes to one. </p>
 <p>Inputs are consumed. (It is fast because the key-value data is stored internally as a list of data blocks, and this routine just links them). Note that concatenating KVS can in effect be performed by consecutive calls to <a class="el" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d" title="Maps simply. ">kmr_map()</a> with the KEEP_OPEN option using the same output KVS. Effective-options: none. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02583">2583</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02618">2618</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1595,7 +1592,7 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Finds the last entry of a key-value stream. </p>
 <p>It returns null when a key-value stream is empty. It sequentially scans all the entries and slow. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02645">2645</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02681">2681</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1632,7 +1629,7 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Fills local key-value entries in an array for inspection. </p>
 <p>The returned pointers point to the inside of the KVS. The array EV should be as large as N. It implies inspect. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02687">2687</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02723">2723</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1681,14 +1678,14 @@ Sorting on a key-value stream is by memcmp(), unless the keys are integer or flo
 <p>Fills keyed records in an array for sorting. </p>
 <p>The array EV should be as large as N. It implies inspect. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02706">2706</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02742">2742</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 8 2015 15:14:37 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 22 2015 18:25:26 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

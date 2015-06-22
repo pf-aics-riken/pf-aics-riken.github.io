@@ -87,7 +87,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">kmrimpl.h File Reference</div>  </div>
 </div><!--header-->
@@ -103,6 +104,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a176a989874d20be61b65804b71817fe5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>CHECK_ONE_FN_OPTION</b>(NAME,  A,  B)</td></tr>
+<tr class="separator:a176a989874d20be61b65804b71817fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69875a2ef630cf3df900bd8dbe67539d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrimpl_8h.html#a69875a2ef630cf3df900bd8dbe67539d">KMR_ALIGN</a>(X)&#160;&#160;&#160;(((X)+((8)-1))&amp;~((8)-1))</td></tr>
 <tr class="memdesc:a69875a2ef630cf3df900bd8dbe67539d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rounds up a given size to the alignment restriction (currently eight bytes).  <a href="#a69875a2ef630cf3df900bd8dbe67539d">More...</a><br /></td></tr>
 <tr class="separator:a69875a2ef630cf3df900bd8dbe67539d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,6 +243,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_assert_o_k
 <tr class="memitem:ab6857d9aa785156a25f17784ab72e4f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6857d9aa785156a25f17784ab72e4f3"></a>
 static _Bool&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_check_alignment</b> (size_t sz)</td></tr>
 <tr class="separator:ab6857d9aa785156a25f17784ab72e4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3988f42a5f5dbf7b91a972800a29d8dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3988f42a5f5dbf7b91a972800a29d8dd"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_check_fn_options</b> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr, struct <a class="el" href="structkmr__option.html">kmr_option</a> provide, struct <a class="el" href="structkmr__option.html">kmr_option</a> given, const char *func)</td></tr>
+<tr class="separator:a3988f42a5f5dbf7b91a972800a29d8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f2971c375ed683a34a2a220c7e67dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65f2971c375ed683a34a2a220c7e67dd"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_check_options</b> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr, MPI_Info conf)</td></tr>
 <tr class="separator:a65f2971c375ed683a34a2a220c7e67dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -375,9 +381,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_free_kvs_pushoff</
 <tr class="memitem:a2fa806736f9a6a5e0e4dc49e497e8a1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2fa806736f9a6a5e0e4dc49e497e8a1d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_get_key_type_ff</b> (const <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs)</td></tr>
 <tr class="separator:a2fa806736f9a6a5e0e4dc49e497e8a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6986d4c93f96b33e3f84013acabb6755"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6986d4c93f96b33e3f84013acabb6755"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_get_nprocs</b> (const <a class="el" href="structkmr__ctx.html">KMR</a> *mr)</td></tr>
+<tr class="separator:a6986d4c93f96b33e3f84013acabb6755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf3032cb3175905b47c905f66dc30948"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf3032cb3175905b47c905f66dc30948"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_get_nprocs_ff</b> (const <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs)</td></tr>
 <tr class="separator:adf3032cb3175905b47c905f66dc30948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86f45b363ed032d0178afd240965a3dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86f45b363ed032d0178afd240965a3dd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_get_rank</b> (const <a class="el" href="structkmr__ctx.html">KMR</a> *mr)</td></tr>
+<tr class="separator:a86f45b363ed032d0178afd240965a3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabe35ff0cbdeb7fde95b36fb5f08a84c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabe35ff0cbdeb7fde95b36fb5f08a84c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_get_rank_ff</b> (const <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs)</td></tr>
 <tr class="separator:aabe35ff0cbdeb7fde95b36fb5f08a84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -504,6 +516,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_map_via_spawn_ff</
 <tr class="memitem:a118992c79090ca7e3c7f69807f166a04"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a118992c79090ca7e3c7f69807f166a04"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_mfree</b> (void *p, size_t sz)</td></tr>
 <tr class="separator:a118992c79090ca7e3c7f69807f166a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6291e0ed104950c6be3c386ae3882139"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6291e0ed104950c6be3c386ae3882139"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_mpi_constant_value</b> (char *s)</td></tr>
+<tr class="separator:a6291e0ed104950c6be3c386ae3882139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b1a591f50c632ec0985570c0b1ee2ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b1a591f50c632ec0985570c0b1ee2ef"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_mpi_type_size</b> (char *s)</td></tr>
+<tr class="separator:a4b1a591f50c632ec0985570c0b1ee2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7883e955dfd6fae607a28956e351db11"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7883e955dfd6fae607a28956e351db11"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_msleep</b> (int msec, int interval)</td></tr>
 <tr class="separator:a7883e955dfd6fae607a28956e351db11"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -522,6 +540,9 @@ static size_t&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_ntuple_n
 <tr class="memitem:acb8c9fd041f48334ae8001b98ce9eb43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb8c9fd041f48334ae8001b98ce9eb43"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_open_log</b> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr)</td></tr>
 <tr class="separator:acb8c9fd041f48334ae8001b98ce9eb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae26f7a21cd0f577c29e7333d63db8e20"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae26f7a21cd0f577c29e7333d63db8e20"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_pairing_fn</b> (const struct <a class="el" href="structkmr__kv__box.html">kmr_kv_box</a> kv, const <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvi, <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvo, void *p, const long i)</td></tr>
+<tr class="separator:ae26f7a21cd0f577c29e7333d63db8e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac12f5fe349416e394c87f1a6df7beb41"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac12f5fe349416e394c87f1a6df7beb41"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_parse_boolean</b> (char *s, int *r)</td></tr>
 <tr class="separator:ac12f5fe349416e394c87f1a6df7beb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -570,6 +591,9 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_ptrstr_ff</b> (
 <tr class="memitem:afd6fa7381e9586ea83cda5256b11a15b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd6fa7381e9586ea83cda5256b11a15b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_pushoff_make_stationary</b> (<a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs)</td></tr>
 <tr class="separator:afd6fa7381e9586ea83cda5256b11a15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed13742921f37a68ae9b9eaa1c41da4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ed13742921f37a68ae9b9eaa1c41da4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_reverse_fn</b> (const struct <a class="el" href="structkmr__kv__box.html">kmr_kv_box</a> kv, const <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs, <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvo, void *p, const long i)</td></tr>
+<tr class="separator:a2ed13742921f37a68ae9b9eaa1c41da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b7903656d6fd2ab95b068c88deb3b69"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b7903656d6fd2ab95b068c88deb3b69"></a>
 static void *&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_safe_malloc</b> (size_t s, char *szexpr, const char *file, const int line, const char *func)</td></tr>
 <tr class="separator:a8b7903656d6fd2ab95b068c88deb3b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -579,6 +603,9 @@ static void *&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_safe_rea
 <tr class="memitem:a7637a02baa6a4e04eb6ff319f9f272b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7637a02baa6a4e04eb6ff319f9f272b0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_scan_argv_strings</b> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr, char *s, size_t len, int arglim, int *argc, char **argv, _Bool wssep, char *msg)</td></tr>
 <tr class="separator:a7637a02baa6a4e04eb6ff319f9f272b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e383fa499e2fcf2835f3f9733da301"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99e383fa499e2fcf2835f3f9733da301"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_set_option_by_strings</b> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr, char *k, char *v)</td></tr>
+<tr class="separator:a99e383fa499e2fcf2835f3f9733da301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a148484bab6e5344b0abcefd8cecebe66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a148484bab6e5344b0abcefd8cecebe66"></a>
 static _Bool&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_shuffle_compatible_data_p</b> (enum <a class="el" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> d0, enum <a class="el" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> d1)</td></tr>
 <tr class="separator:a148484bab6e5344b0abcefd8cecebe66"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -594,6 +621,15 @@ signed long&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_stable_key
 <tr class="memitem:ad5dfd7453641c98f1023d04652eae05e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrimpl_8h.html#ad5dfd7453641c98f1023d04652eae05e">kmr_string_truncation</a> (<a class="el" href="structkmr__ctx.html">KMR</a> *mr, size_t sz, char *s)</td></tr>
 <tr class="memdesc:ad5dfd7453641c98f1023d04652eae05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies the string end with by "..." for indicating truncation, used on the result of snprintf.  <a href="#ad5dfd7453641c98f1023d04652eae05e">More...</a><br /></td></tr>
 <tr class="separator:ad5dfd7453641c98f1023d04652eae05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574c0bf77291f8155dbc5eca83e05362"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrimpl_8h.html#a574c0bf77291f8155dbc5eca83e05362">kmr_stringify_file_options</a> (struct <a class="el" href="structkmr__file__option.html">kmr_file_option</a> o)</td></tr>
+<tr class="memdesc:a574c0bf77291f8155dbc5eca83e05362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a print string of a single option, to check the bits are properly encoded in foreign language interfaces.  <a href="#a574c0bf77291f8155dbc5eca83e05362">More...</a><br /></td></tr>
+<tr class="separator:a574c0bf77291f8155dbc5eca83e05362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adca7464aad7af8cac72ca57b148b2999"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrimpl_8h.html#adca7464aad7af8cac72ca57b148b2999">kmr_stringify_options</a> (struct <a class="el" href="structkmr__option.html">kmr_option</a> o)</td></tr>
+<tr class="memdesc:adca7464aad7af8cac72ca57b148b2999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a print string of a single option, to check the bits are properly encoded in foreign language interfaces.  <a href="#adca7464aad7af8cac72ca57b148b2999">More...</a><br /></td></tr>
+<tr class="separator:adca7464aad7af8cac72ca57b148b2999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a243a0622d8f29b979fe6fe87b1d89742"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kmrimpl_8h.html#a243a0622d8f29b979fe6fe87b1d89742">kmr_stringify_spawn_options</a> (struct <a class="el" href="structkmr__spawn__option.html">kmr_spawn_option</a> o)</td></tr>
+<tr class="memdesc:a243a0622d8f29b979fe6fe87b1d89742"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a print string of a single option, to check the bits are properly encoded in foreign language interfaces.  <a href="#a243a0622d8f29b979fe6fe87b1d89742">More...</a><br /></td></tr>
+<tr class="separator:a243a0622d8f29b979fe6fe87b1d89742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7285d9305f71376b016ea59d737ce19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7285d9305f71376b016ea59d737ce19"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_strint_ff</b> (char *p)</td></tr>
 <tr class="separator:ac7285d9305f71376b016ea59d737ce19"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -612,6 +648,9 @@ static _Bool&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unit_size
 <tr class="memitem:a5a298b6bad21087eeface3eaa0099cac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a298b6bad21087eeface3eaa0099cac"></a>
 static enum <a class="el" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unit_sized_with_unmanaged</b> (enum <a class="el" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> data)</td></tr>
 <tr class="separator:a5a298b6bad21087eeface3eaa0099cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b18656ffe5b22f4b9aab6de2ab5cdf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92b18656ffe5b22f4b9aab6de2ab5cdf"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (const struct <a class="el" href="structkmr__kv__box.html">kmr_kv_box</a> kv, const <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs, <a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvo, void *p, const long i)</td></tr>
+<tr class="separator:a92b18656ffe5b22f4b9aab6de2ab5cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a026416d10759045df5e58d35f9af07ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a026416d10759045df5e58d35f9af07ad"></a>
 static _Bool&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_value_pointer_p</b> (<a class="el" href="unionkmr__kvs.html">KMR_KVS</a> *kvs)</td></tr>
 <tr class="separator:a026416d10759045df5e58d35f9af07ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -621,6 +660,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_warning</b> (<a c
 <tr class="memitem:a7e1c73316d0feeae97bb349c8c08f00d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e1c73316d0feeae97bb349c8c08f00d"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void)</td></tr>
 <tr class="separator:a7e1c73316d0feeae97bb349c8c08f00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aad208393c1879f12937a85f8b218ce6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad208393c1879f12937a85f8b218ce6e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_bad</b></td></tr>
+<tr class="separator:aad208393c1879f12937a85f8b218ce6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa754f494aec254d40dc7730f38a097df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa754f494aec254d40dc7730f38a097df"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_cstring</b></td></tr>
+<tr class="separator:aa754f494aec254d40dc7730f38a097df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d3505f1d72799bbf67bd64b55f2febf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d3505f1d72799bbf67bd64b55f2febf"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_float8</b></td></tr>
+<tr class="separator:a4d3505f1d72799bbf67bd64b55f2febf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa626923592c890071567a238c63546"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4aa626923592c890071567a238c63546"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_integer</b></td></tr>
+<tr class="separator:a4aa626923592c890071567a238c63546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa766f326c2944098b08a5dc56b3f9f8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa766f326c2944098b08a5dc56b3f9f8d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_opaque</b></td></tr>
+<tr class="separator:aa766f326c2944098b08a5dc56b3f9f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e1359c736812a63eb571b822cc95e6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e1359c736812a63eb571b822cc95e6e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_pointer_owned</b></td></tr>
+<tr class="separator:a6e1359c736812a63eb571b822cc95e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e48f589b01e2b72ce7c66a14ccf473"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7e48f589b01e2b72ce7c66a14ccf473"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_field_pointer_unmanaged</b></td></tr>
+<tr class="separator:af7e48f589b01e2b72ce7c66a14ccf473"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utilities Private Part (do not include from applications). </p>
@@ -737,6 +800,46 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 </div>
 </div>
+<a class="anchor" id="a176a989874d20be61b65804b71817fe5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHECK_ONE_FN_OPTION</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NAME, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">A, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">B&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (A . NAME &lt; B . NAME) { \</div>
+<div class="line">        char ee[80]; \</div>
+<div class="line">        snprintf(ee, <span class="keyword">sizeof</span>(ee), \</div>
+<div class="line">                 <span class="stringliteral">&quot;%s() does not support &#39;&quot;</span> # NAME <span class="stringliteral">&quot;&#39; option&quot;</span>, func); \</div>
+<div class="line">        kmr_error(mr, ee); \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>Definition at line <a class="el" href="kmrimpl_8h_source.html#l00949">949</a> of file <a class="el" href="kmrimpl_8h_source.html">kmrimpl.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="ab692406b157a14b5dfbe3a2dc56e8447"></a>
 <div class="memitem">
@@ -815,7 +918,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Modifies the string end with by "..." for indicating truncation, used on the result of snprintf. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00183">183</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00193">193</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -854,7 +957,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Returns a handle to a key-value entry &ndash; a reverse of <a class="el" href="kmrimpl_8h.html#aad9e2764df02128a6f995b00f31c2e14" title="Stores a key-value pair at the entry E in the store – a reverse of kmr_pick_kv(). ">kmr_poke_kv()</a>. </p>
 <p>An entry does not know its data-types but they are taken from a key-value stream KVS. </p>
 
-<p>Definition at line <a class="el" href="kmrimpl_8h_source.html#l00550">550</a> of file <a class="el" href="kmrimpl_8h_source.html">kmrimpl.h</a>.</p>
+<p>Definition at line <a class="el" href="kmrimpl_8h_source.html#l00551">551</a> of file <a class="el" href="kmrimpl_8h_source.html">kmrimpl.h</a>.</p>
 
 </div>
 </div>
@@ -911,7 +1014,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Stores a key-value pair at the entry E in the store &ndash; a reverse of <a class="el" href="kmrimpl_8h.html#ac1bdf99c941970b81bb375c5454b0caa" title="Returns a handle to a key-value entry – a reverse of kmr_poke_kv(). ">kmr_pick_kv()</a>. </p>
 <p>A key-value pair does not know its data-types but they are taken from a key-value stream. It modifies <a class="el" href="structkmr__kv__box.html" title="Handy Copy of a Key-Value Field. ">kmr_kv_box</a> XKV (when non-null) to return the pointer to the opaque field when a key or a value is opaque. It does not move actual data when RESERVE_SPACE_ONLY=1. </p>
 
-<p>Definition at line <a class="el" href="kmrimpl_8h_source.html#l00598">598</a> of file <a class="el" href="kmrimpl_8h_source.html">kmrimpl.h</a>.</p>
+<p>Definition at line <a class="el" href="kmrimpl_8h_source.html#l00599">599</a> of file <a class="el" href="kmrimpl_8h_source.html">kmrimpl.h</a>.</p>
 
 </div>
 </div>
@@ -942,7 +1045,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Gets TOFU position (physical coordinates) of the node. </p>
 <p>Errors are fatal (aborts). </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00352">352</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00441">441</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -962,7 +1065,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Returns itself; this is for Fortran-binding. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00198">198</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00208">208</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -999,7 +1102,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Fills the character array S by the contents at the pointer value integer P by the length N. </p>
 <p>It returns the string length in C limited by N. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00247">247</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00257">257</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1019,7 +1122,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Fixes little-endian bits used in Fortran to host-endian. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00274">274</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00284">284</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1102,7 +1205,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Loads properties into MPI_Info (in Latin1 characters). </p>
 <p>It runs only on the main-thread. It returns MPI_SUCCESS normally. It stores only Latin1 strings because MPI_Info does. Refer to the JDK document "java.util.Properties.load()" for the ".properties" format. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l01650">1650</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l01844">1844</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1133,7 +1236,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Copies contents of MPI_Info. </p>
 <p>The destination info is modified. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l02037">2037</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l02231">2231</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1163,7 +1266,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Dumps simply contents in MPI_Info. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l02011">2011</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l02205">2205</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1255,7 +1358,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Searches a key entry like bsearch(3C), but returns a next greater entry instead of null on no match. </p>
 <p>Thus, it may return a pointer ((char *)base+(nel*size)) when a key is larger than all. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00476">476</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00565">565</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1298,7 +1401,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Checks a key-value stream is sorted. </p>
 <p>When not LOCALLY, it collects all the entries to rank-zero for checking. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00613">613</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00702">702</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1319,7 +1422,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 <p>Finds the last entry of a key-value stream. </p>
 <p>It returns null when a key-value stream is empty. It sequentially scans all the entries and slow. </p>
 
-<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02645">2645</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrbase_8c_source.html#l02681">2681</a> of file <a class="el" href="kmrbase_8c_source.html">kmrbase.c</a>.</p>
 
 </div>
 </div>
@@ -1573,7 +1676,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>STRDUP, but aborts on failure. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00503">503</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00592">592</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1603,7 +1706,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Does fopen, avoiding EINTR. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00521">521</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00610">610</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1623,7 +1726,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Does fgetc, avoiding EINTR. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00533">533</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00622">622</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -1643,7 +1746,67 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 
 <p>Does getdtablesize(); it is defined, because it is not Posix. </p>
 
-<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00546">546</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00635">635</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adca7464aad7af8cac72ca57b148b2999"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* kmr_stringify_options </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structkmr__option.html">kmr_option</a>&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a print string of a single option, to check the bits are properly encoded in foreign language interfaces. </p>
+
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00361">361</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a574c0bf77291f8155dbc5eca83e05362"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* kmr_stringify_file_options </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structkmr__file__option.html">kmr_file_option</a>&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a print string of a single option, to check the bits are properly encoded in foreign language interfaces. </p>
+
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00386">386</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a243a0622d8f29b979fe6fe87b1d89742"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* kmr_stringify_spawn_options </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structkmr__spawn__option.html">kmr_spawn_option</a>&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a print string of a single option, to check the bits are properly encoded in foreign language interfaces. </p>
+
+<p>Definition at line <a class="el" href="kmrutil_8c_source.html#l00405">405</a> of file <a class="el" href="kmrutil_8c_source.html">kmrutil.c</a>.</p>
 
 </div>
 </div>
@@ -2273,7 +2436,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_wtime</b> (void
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 8 2015 15:14:37 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 22 2015 18:25:26 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

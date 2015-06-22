@@ -438,7 +438,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_bu
 
 <p>Sends a reply message in the spawned process, which tells it is ready to finish and may have some data to send to the spawner in <a class="el" href="kmrmapms_8c.html#a2502be0968e7f62404e02f8f445c7498" title="Maps on processes started by MPI_Comm_spawn(). ">kmr_map_via_spawn()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01770">1770</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01773">1773</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -469,7 +469,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_bu
 <p>Obtains (a reference to) a parent inter-communicator of a spawned process. </p>
 <p>It is used inside a map-function of <a class="el" href="kmrmapms_8c.html#a2502be0968e7f62404e02f8f445c7498" title="Maps on processes started by MPI_Comm_spawn(). ">kmr_map_via_spawn()</a>; Pass INDEX the same argument to a map-function. It returns a reference for the side-effect of freeing a communicator in a map-function. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01793">1793</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01796">1796</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -530,7 +530,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_kv_bu
  NOTE: There is no way to check the availability of processes for spawning in the MPI specification and MPI implementations. And, the MPI runtime signals errors when it runs out the processes. Thus, it puts a sleep (1 sec) in between MPI_Comm_spawn() calls to allow clean-ups in the MPI runtime and to avoid timing issues.<br />
  INTERFACE CHANGE: Set mr-&gt;spawn_pass_intercomm_in_argument=1 to enables the old interface, where the map-function MAPFN is called with the <a class="el" href="structkmr__spawn__state.html" title="State of each Spawning. ">kmr_spawn_state</a> structure as the general argument. The argument ARG passed to the mapper is stored in the MAPARG slot in the <a class="el" href="structkmr__spawn__state.html" title="State of each Spawning. ">kmr_spawn_state</a> structure. When TAKE_CKPT option is specified, a checkpoint data file of the output key-value stream is saved if both CKPT_ENABLE and CKPT_SELECTIVE global options are set. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01864">1864</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01867">1867</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -589,7 +589,7 @@ This function detects the end of spawned processes using a watch-program "kmrwat
  NOTE (on MPI spawn implementations): Open MPI (1.6) allows to spawn non-MPI processes by passing an special MPI_Info. MPICH2 (1.5) does not allow to spawn non-MPI processes, because MPI_Comm_spawn() of the parent and MPI_Init() of the child synchronize. In Intel MPI (4.1) and YAMPI2 (GridMPI), the calls of MPI_Comm_free() on the parent and MPI_Finalize() or MPI_Comm_free() on the child synchronize, and thus, they require to call MPI_Comm_free() at an appropriate time on the parent.<br />
  Options REPLY_ROOT and REPLY_EACH have no effect. When TAKE_CKPT option is specified, a checkpoint data file of the output key-value stream is saved if both CKPT_ENABLE and CKPT_SELECTIVE global options are set. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01909">1909</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01912">1912</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -645,7 +645,7 @@ This function detects the end of spawned processes using a watch-program "kmrwat
 <p>This should NOT be used; Use <a class="el" href="kmrmapms_8c.html#a4f8a223da5a75d698ca59279bf1c7384" title="Maps in master-slave mode, specialized to run serial commands. ">kmr_map_ms_commands()</a>, instead. Fork-execing in <a class="el" href="kmrmapms_8c.html#a4f8a223da5a75d698ca59279bf1c7384" title="Maps in master-slave mode, specialized to run serial commands. ">kmr_map_ms_commands()</a> is simpler than spawning. See also the comment on <a class="el" href="kmrmapms_8c.html#a2502be0968e7f62404e02f8f445c7498" title="Maps on processes started by MPI_Comm_spawn(). ">kmr_map_via_spawn()</a> and <a class="el" href="kmrmapms_8c.html#a309f2ef87bc5f4ec67d53a446cbb392e" title="Maps on processes started by MPI_Comm_spawn() to run independent MPI processes, which will not commun...">kmr_map_parallel_processes()</a>. The map-function is called after the processes have exited, thus, there is no way to communicate from the map-function. Instead, the map-function can check the result files created by the spawned processes.<br />
  This function detects the end of spawned processes using a watch-program "kmrwatch0" which sends a reply to the parent in place of the serial program. Options REPLY_ROOT and REPLY_EACH have no effect. When TAKE_CKPT option is specified, a checkpoint data file of the output key-value stream is saved if both CKPT_ENABLE and CKPT_SELECTIVE global options are set. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01939">1939</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01942">1942</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -706,7 +706,7 @@ This function detects the end of spawned processes using a watch-program "kmrwat
 <p>Maps on processes started by MPI_Comm_spawn() to run independent processes. </p>
 <p>It either calls <a class="el" href="kmrmapms_8c.html#a309f2ef87bc5f4ec67d53a446cbb392e" title="Maps on processes started by MPI_Comm_spawn() to run independent MPI processes, which will not commun...">kmr_map_parallel_processes()</a> or <a class="el" href="kmrmapms_8c.html#a5120d3c93ea5a471ab040f94dbd29a41" title="Maps on processes started by MPI_Comm_spawn() to run serial processes. ">kmr_map_serial_processes()</a> with regard to the NONMPI argument. See the comments of <a class="el" href="kmrmapms_8c.html#a309f2ef87bc5f4ec67d53a446cbb392e" title="Maps on processes started by MPI_Comm_spawn() to run independent MPI processes, which will not commun...">kmr_map_parallel_processes()</a> and <a class="el" href="kmrmapms_8c.html#a5120d3c93ea5a471ab040f94dbd29a41" title="Maps on processes started by MPI_Comm_spawn() to run serial processes. ">kmr_map_serial_processes()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01959">1959</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01962">1962</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -737,7 +737,7 @@ This function detects the end of spawned processes using a watch-program "kmrwat
 <p>Sends the KVS from a spawned process to the map-function of the spawner. </p>
 <p>It is paired with <a class="el" href="kmrmapms_8c.html#a98e4b71fc1aa9386021576dd9c186b85" title="Collects key-value pairs generated by spawned processes. ">kmr_receive_kvs_from_spawned_fn()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l01999">1999</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02002">2002</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -786,7 +786,7 @@ This function detects the end of spawned processes using a watch-program "kmrwat
 <p>Collects key-value pairs generated by spawned processes. </p>
 <p>It is a map-function to be used with <a class="el" href="kmrmapms_8c.html#a2502be0968e7f62404e02f8f445c7498" title="Maps on processes started by MPI_Comm_spawn(). ">kmr_map_via_spawn()</a> with the REPLY_EACH option. The spawned processes call <a class="el" href="kmrmapms_8c.html#a14f2e46ad4e40fb0f7140ffbf6da58e7" title="Sends the KVS from a spawned process to the map-function of the spawner. ">kmr_send_kvs_to_spawner()</a> to send generated key-value pairs, and this function receives and puts them into KVO. PROTOCOL: The reply consists of one or two messages with the tag KMR_TAG_SPAWN_REPLY1=501. One is the data size, which is followed by a marshaled key-value stream when the data size is non-zero. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02033">2033</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02036">2036</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -842,7 +842,7 @@ This function detects the end of spawned processes using a watch-program "kmrwat
 
 <p>Runs commands in <a class="el" href="kmrmapms_8c.html#a4f8a223da5a75d698ca59279bf1c7384" title="Maps in master-slave mode, specialized to run serial commands. ">kmr_map_ms_commands()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02084">2084</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02087">2087</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
@@ -897,14 +897,14 @@ This function detects the end of spawned processes using a watch-program "kmrwat
 <p>Maps in master-slave mode, specialized to run serial commands. </p>
 <p>It fork-execs commands specified by key-values, then calls a map-function at finishes of the commands. It takes the commands in the same way as <a class="el" href="kmrmapms_8c.html#a2502be0968e7f62404e02f8f445c7498" title="Maps on processes started by MPI_Comm_spawn(). ">kmr_map_via_spawn()</a>. The commands never be MPI programs. It is implemented with <a class="el" href="kmrmapms_8c.html#a9d52c3c69250bf19dd28d5e38809df79" title="Maps in master-slave mode. ">kmr_map_ms()</a>; see the comments on <a class="el" href="kmrmapms_8c.html#a9d52c3c69250bf19dd28d5e38809df79" title="Maps in master-slave mode. ">kmr_map_ms()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02192">2192</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmapms_8c_source.html#l02195">2195</a> of file <a class="el" href="kmrmapms_8c_source.html">kmrmapms.c</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 8 2015 15:14:37 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 22 2015 18:25:26 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

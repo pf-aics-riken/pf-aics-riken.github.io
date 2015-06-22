@@ -348,211 +348,213 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;{</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="preprocessor">#ifdef __K</span></div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <a class="code" href="structkmr__ctx.html">KMR</a> *mr = kvi-&gt;c.mr;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a>(mr)) {</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#a129f5c32dd397ce2f9375fc95482c390">kmr_ckpt_progress_init</a>(kvi, kvo, opt)) {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keywordflow">if</span> (!opt.keep_open) {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvo);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            }</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <span class="keywordflow">if</span> (!opt.inspect) {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvi);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            <span class="keywordflow">return</span> MPI_SUCCESS;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordtype">int</span> kcdc = <a class="code" href="kmrimpl_8h.html#aa3516d8c2ee13779f9096dc358397697">kmr_ckpt_disable_ckpt</a>(mr);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    _Bool tracing5 = (mr-&gt;trace_iolb &amp;&amp; (5 &lt;= mr-&gt;verbosity));</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="comment">/*----------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="comment">/* Create &lt;iog_id,rank&gt; kvs and shuffle it */</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordtype">int</span> rank_xy = kmr_iolb_calc_xy_of_rank(mr-&gt;rank);</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_myrank = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_INTEGER);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> kv_rnk = { .klen = <span class="keyword">sizeof</span>(long),</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                                 .vlen = <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>),</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                                 .k.i  = rank_xy,</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                                 .v.i  = mr-&gt;rank };</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordtype">int</span> cc = <a class="code" href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a>(kvs_myrank, kv_rnk);</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    cc = <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvs_myrank);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__option.html">kmr_option</a> kmr_supported = {.inspect = 1, .take_ckpt = 1};</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    kmr_check_fn_options(mr, kmr_supported, opt, __func__);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a>(mr)) {</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#a129f5c32dd397ce2f9375fc95482c390">kmr_ckpt_progress_init</a>(kvi, kvo, opt)) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">if</span> (!opt.keep_open) {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvo);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            <span class="keywordflow">if</span> (!opt.inspect) {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvi);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            }</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">return</span> MPI_SUCCESS;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    }</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">int</span> kcdc = <a class="code" href="kmrimpl_8h.html#aa3516d8c2ee13779f9096dc358397697">kmr_ckpt_disable_ckpt</a>(mr);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    _Bool tracing5 = (mr-&gt;trace_iolb &amp;&amp; (5 &lt;= mr-&gt;verbosity));</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="comment">/*----------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="comment">/* Create &lt;iog_id,rank&gt; kvs and shuffle it */</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordtype">int</span> rank_xy = kmr_iolb_calc_xy_of_rank(mr-&gt;rank);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_myrank = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_INTEGER);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> kv_rnk = { .klen = <span class="keyword">sizeof</span>(long),</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                                 .vlen = <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>),</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                                 .k.i  = rank_xy,</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                                 .v.i  = mr-&gt;rank };</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordtype">int</span> cc = <a class="code" href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a>(kvs_myrank, kv_rnk);</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_rank = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_INTEGER);</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvs_myrank, kvs_rank, kmr_noopt);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keywordflow">if</span> (tracing5) {</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;;;KMR IOLB [%05d]: Group[%d] - Rank[%05d]\n&quot;</span>,</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                mr-&gt;rank, rank_xy, mr-&gt;rank);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        fflush(stderr);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="comment">/* Create &lt;iog_id,file_name&gt; kvs and shuffle it */</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keyword">enum</span> <a class="code" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> keyf = kvi-&gt;c.key_data;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">enum</span> <a class="code" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> valf = kvi-&gt;c.value_data;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    assert(valf == KMR_KV_OPAQUE);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_each_file = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, keyf, valf);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__option.html">kmr_option</a> inspect = {.inspect = 1};</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvi, kvs_each_file, inspect);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_fileloc_each = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER,</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                                               KMR_KV_OPAQUE);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_each_file, kvs_fileloc_each, NULL, kmr_noopt,</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                 kmr_iolb_find_file_location_k);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_fileloc = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_OPAQUE);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvs_fileloc_each, kvs_fileloc, kmr_noopt);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="comment">/* Merge &lt;iog_id,rank&gt; kvs and &lt;iog_id,file_name&gt; kvs to</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">       create &lt;rank, file_name&gt; kvs */</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordtype">long</span> nranks, nfilelocs;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvs_rank, &amp;nranks);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvs_fileloc, &amp;nfilelocs);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    cc = <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvs_myrank);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_rank = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_INTEGER);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvs_myrank, kvs_rank, kmr_noopt);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keywordflow">if</span> (tracing5) {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;;;KMR IOLB [%05d]: Group[%d] - Rank[%05d]\n&quot;</span>,</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                mr-&gt;rank, rank_xy, mr-&gt;rank);</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        fflush(stderr);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="comment">/* Create &lt;iog_id,file_name&gt; kvs and shuffle it */</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keyword">enum</span> <a class="code" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> keyf = kvi-&gt;c.key_data;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keyword">enum</span> <a class="code" href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a> valf = kvi-&gt;c.value_data;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    assert(valf == KMR_KV_OPAQUE || valf == KMR_KV_CSTRING);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_each_file = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, keyf, valf);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__option.html">kmr_option</a> inspect = {.inspect = 1};</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvi, kvs_each_file, inspect);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_fileloc_each = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER,</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                                               KMR_KV_OPAQUE);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_each_file, kvs_fileloc_each, NULL, kmr_noopt,</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                 kmr_iolb_find_file_location_k);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_fileloc = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_OPAQUE);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvs_fileloc_each, kvs_fileloc, kmr_noopt);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="comment">/* Merge &lt;iog_id,rank&gt; kvs and &lt;iog_id,file_name&gt; kvs to</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">       create &lt;rank, file_name&gt; kvs */</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordtype">long</span> nranks, nfilelocs;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvs_rank, &amp;nranks);</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_map = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_OPAQUE);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">if</span> (nranks &gt; 0 &amp;&amp; nfilelocs &gt; 0) {</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary1 =</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nranks * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_rank, NULL, kvs_ary1, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary2 =</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nfilelocs * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_fileloc, NULL, kvs_ary2, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="keywordtype">int</span> n = (int)(nfilelocs / nranks);</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keywordtype">int</span> r = (int)(nfilelocs % nranks);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordtype">int</span> asgn_cnt = (n == 0)? r : (<span class="keywordtype">int</span>)nranks;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordtype">int</span> assigned = 0;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; asgn_cnt; i++) {</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            <span class="keywordtype">long</span> t_rank = kvs_ary1[i].v.i;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            <span class="keywordtype">int</span> cnt = n + ((i &lt; r)? 1 : 0);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; cnt; j++) {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                <span class="keywordtype">char</span> *t_file = (<span class="keywordtype">char</span> *)kvs_ary2[assigned + j].v.p;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                <span class="keywordtype">int</span> t_file_siz = kvs_ary2[assigned + j].vlen;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                <span class="keyword">struct</span> <a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> nkv = { .klen = <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>),</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                                          .vlen = t_file_siz,</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                                          .k.i  = t_rank,</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                                          .v.p  = (<span class="keywordtype">char</span> *)t_file };</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                <a class="code" href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a>(kvs_map, nkv);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            }</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            assigned += cnt;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        free(kvs_ary1);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        free(kvs_ary2);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="comment">/* TODO</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">           nranks &gt; 0 &amp;&amp; nfilelocs == 0 :</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">                 no need to do, or read files from other groups</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">           nranks == 0 &amp;&amp; nfilelocs &gt; 0 :</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">             read files from other groups</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">           nranks == 0 &amp;&amp; nfilelocs == 0 :</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">             no need to do</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">             */</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        assert(nfilelocs &lt;= 0);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    }</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvs_map);</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs_rank);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs_fileloc);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_myfile = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_OPAQUE);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvs_map, kvs_myfile, kmr_noopt);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordflow">if</span> (tracing5) {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_myfile, NULL, NULL, inspect,</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                     kmr_iolb_print_assigned_files);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="comment">/* Create &lt;key_in_kvi,assigned_file_name&gt; kvs and save it as kvo&gt; */</span></div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvi_all = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, keyf, valf);</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    cc = <a class="code" href="kmr_8h.html#a64d9a689d79d64bcfa10d61c1d335ee7">kmr_replicate</a>(kvi, kvi_all, inspect);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keywordtype">long</span> nkvi_all, nkvo;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvi_all, &amp;nkvi_all);</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary1 =</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nkvi_all * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvi_all, NULL, kvs_ary1, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvs_myfile, &amp;nkvo);</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvs_fileloc, &amp;nfilelocs);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_map = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_OPAQUE);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordflow">if</span> (nranks &gt; 0 &amp;&amp; nfilelocs &gt; 0) {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary1 =</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nranks * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_rank, NULL, kvs_ary1, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary2 =</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nfilelocs * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_fileloc, NULL, kvs_ary2, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordtype">int</span> n = (int)(nfilelocs / nranks);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        <span class="keywordtype">int</span> r = (int)(nfilelocs % nranks);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordtype">int</span> asgn_cnt = (n == 0)? r : (<span class="keywordtype">int</span>)nranks;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keywordtype">int</span> assigned = 0;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; asgn_cnt; i++) {</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            <span class="keywordtype">long</span> t_rank = kvs_ary1[i].v.i;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            <span class="keywordtype">int</span> cnt = n + ((i &lt; r)? 1 : 0);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; cnt; j++) {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                <span class="keywordtype">char</span> *t_file = (<span class="keywordtype">char</span> *)kvs_ary2[assigned + j].v.p;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                <span class="keywordtype">int</span> t_file_siz = kvs_ary2[assigned + j].vlen;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                <span class="keyword">struct</span> <a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> nkv = { .klen = <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>),</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                                          .vlen = t_file_siz,</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                                          .k.i  = t_rank,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                                          .v.p  = (<span class="keywordtype">char</span> *)t_file };</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                <a class="code" href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a>(kvs_map, nkv);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            assigned += cnt;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        free(kvs_ary1);</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        free(kvs_ary2);</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="comment">/* TODO</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment">           nranks &gt; 0 &amp;&amp; nfilelocs == 0 :</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment">                 no need to do, or read files from other groups</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">           nranks == 0 &amp;&amp; nfilelocs &gt; 0 :</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">             read files from other groups</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">           nranks == 0 &amp;&amp; nfilelocs == 0 :</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">             no need to do</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">             */</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        assert(nfilelocs &lt;= 0);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvs_map);</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs_rank);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs_fileloc);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs_myfile = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_OPAQUE);</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    cc = <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvs_map, kvs_myfile, kmr_noopt);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keywordflow">if</span> (tracing5) {</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_myfile, NULL, NULL, inspect,</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                     kmr_iolb_print_assigned_files);</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="comment">/* Create &lt;key_in_kvi,assigned_file_name&gt; kvs and save it as kvo&gt; */</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvi_all = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, keyf, valf);</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    cc = <a class="code" href="kmr_8h.html#a64d9a689d79d64bcfa10d61c1d335ee7">kmr_replicate</a>(kvi, kvi_all, inspect);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordtype">long</span> nkvi_all, nkvo;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvi_all, &amp;nkvi_all);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary1 =</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nkvi_all * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvi_all, NULL, kvs_ary1, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary2 =</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nkvo * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_myfile, NULL, kvs_ary2, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    assert(cc == MPI_SUCCESS);</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    KMR_OMP_PARALLEL_FOR_</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nkvo; i++) {</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            _Bool kv_added = 0;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nkvi_all; j++) {</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                <span class="keywordflow">if</span> (kmr_iolb_value_is_equal(kvs_ary1[j], kvs_ary2[i])) {</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                    <a class="code" href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a>(kvo, kvs_ary1[j]);</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                    kv_added = 1;</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                }</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            assert(kv_added);</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        }</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    free(kvs_ary1);</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    free(kvs_ary2);</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    assert(kvs_myfile-&gt;c.element_count == kvo-&gt;c.element_count);</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs_myfile);</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvi_all);</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="comment">/*----------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <a class="code" href="kmrimpl_8h.html#a27f917656650b63fa2fc5f28172e9c66">kmr_ckpt_enable_ckpt</a>(mr, kcdc);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="keywordflow">if</span> (!opt.keep_open) {</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvo);</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    }</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a>(mr)) {</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        <a class="code" href="kmrimpl_8h.html#a1e5f414c1c33362d21dc0d7ebfc4a9cf">kmr_ckpt_save_kvo_whole</a>(mr, kvo);</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    }</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keywordflow">if</span> (!opt.inspect) {</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvi);</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    }</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a>(mr)) {</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;        <a class="code" href="kmrimpl_8h.html#a40bf6c136eee2bf0061346d6c4ddd44b">kmr_ckpt_progress_fin</a>(mr);</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    }</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keywordflow">return</span> MPI_SUCCESS;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvi, kvo, opt);</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*__K*/</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;}</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">Copyright (C) 2012-2015 RIKEN AICS</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">This library is distributed WITHOUT ANY WARRANTY.  This library can be</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">redistributed and/or modified under the terms of the BSD 2-Clause License.</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    cc = <a class="code" href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a>(kvs_myfile, &amp;nkvo);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *kvs_ary2 =</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        (<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> *)malloc((<span class="keywordtype">size_t</span>)nkvo * <span class="keyword">sizeof</span>(<span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a>));</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    cc = <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs_myfile, NULL, kvs_ary2, inspect, <a class="code" href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a>);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    assert(cc == MPI_SUCCESS);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    KMR_OMP_PARALLEL_FOR_</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nkvo; i++) {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            _Bool kv_added = 0;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nkvi_all; j++) {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                <span class="keywordflow">if</span> (kmr_iolb_value_is_equal(kvs_ary1[j], kvs_ary2[i])) {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                    <a class="code" href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a>(kvo, kvs_ary1[j]);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                    kv_added = 1;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            }</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            assert(kv_added);</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        }</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    free(kvs_ary1);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    free(kvs_ary2);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    assert(kvs_myfile-&gt;c.element_count == kvo-&gt;c.element_count);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs_myfile);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvi_all);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="comment">/*----------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <a class="code" href="kmrimpl_8h.html#a27f917656650b63fa2fc5f28172e9c66">kmr_ckpt_enable_ckpt</a>(mr, kcdc);</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    <span class="keywordflow">if</span> (!opt.keep_open) {</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        <a class="code" href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a>(kvo);</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    }</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a>(mr)) {</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        <a class="code" href="kmrimpl_8h.html#a1e5f414c1c33362d21dc0d7ebfc4a9cf">kmr_ckpt_save_kvo_whole</a>(mr, kvo);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    }</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordflow">if</span> (!opt.inspect) {</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;        <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvi);</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    }</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a>(mr)) {</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        <a class="code" href="kmrimpl_8h.html#a40bf6c136eee2bf0061346d6c4ddd44b">kmr_ckpt_progress_fin</a>(mr);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    }</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keywordflow">return</span> MPI_SUCCESS;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a>(kvi, kvo, opt);</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/*__K*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;}</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">Copyright (C) 2012-2015 RIKEN AICS</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">This library is distributed WITHOUT ANY WARRANTY.  This library can be</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment">redistributed and/or modified under the terms of the BSD 2-Clause License.</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">*/</span></div>
 <div class="ttc" id="kmrimpl_8h_html_a129f5c32dd397ce2f9375fc95482c390"><div class="ttname"><a href="kmrimpl_8h.html#a129f5c32dd397ce2f9375fc95482c390">kmr_ckpt_progress_init</a></div><div class="ttdeci">int kmr_ckpt_progress_init(KMR_KVS *, KMR_KVS *, struct kmr_option)</div><div class="ttdoc">It initializes a progress of MapReduce checkpointing. </div><div class="ttdef"><b>Definition:</b> <a href="kmrckpt_8c_source.html#l02750">kmrckpt.c:2750</a></div></div>
-<div class="ttc" id="unionkmr__kvs_html"><div class="ttname"><a href="unionkmr__kvs.html">kmr_kvs</a></div><div class="ttdoc">Key-Value Stream (abstract). </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00578">kmr.h:578</a></div></div>
+<div class="ttc" id="unionkmr__kvs_html"><div class="ttname"><a href="unionkmr__kvs.html">kmr_kvs</a></div><div class="ttdoc">Key-Value Stream (abstract). </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00577">kmr.h:577</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html"><div class="ttname"><a href="kmrimpl_8h.html">kmrimpl.h</a></div><div class="ttdoc">Utilities Private Part (do not include from applications). </div></div>
 <div class="ttc" id="structkmr__fefs__stripe_html"><div class="ttname"><a href="structkmr__fefs__stripe.html">kmr_fefs_stripe</a></div><div class="ttdoc">Lustre Striping Information with OBDIDX. </div><div class="ttdef"><b>Definition:</b> <a href="kmrfefs_8h_source.html#l00020">kmrfefs.h:20</a></div></div>
 <div class="ttc" id="kmriolb_8c_html_aeb16f94c3684f127671a8112dbcd9747"><div class="ttname"><a href="kmriolb_8c.html#aeb16f94c3684f127671a8112dbcd9747">kmr_assign_file</a></div><div class="ttdeci">int kmr_assign_file(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Assigns files to ranks based on data locality. </div><div class="ttdef"><b>Definition:</b> <a href="kmriolb_8c_source.html#l00257">kmriolb.c:257</a></div></div>
-<div class="ttc" id="structkmr__option_html"><div class="ttname"><a href="structkmr__option.html">kmr_option</a></div><div class="ttdoc">Options to Mapping, Shuffling, and Reduction. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00604">kmr.h:604</a></div></div>
+<div class="ttc" id="structkmr__option_html"><div class="ttname"><a href="structkmr__option.html">kmr_option</a></div><div class="ttdoc">Options to Mapping, Shuffling, and Reduction. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00603">kmr.h:603</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_a40bf6c136eee2bf0061346d6c4ddd44b"><div class="ttname"><a href="kmrimpl_8h.html#a40bf6c136eee2bf0061346d6c4ddd44b">kmr_ckpt_progress_fin</a></div><div class="ttdeci">void kmr_ckpt_progress_fin(KMR *)</div><div class="ttdoc">It finalizes the progress of MapReduce checkpointing. </div><div class="ttdef"><b>Definition:</b> <a href="kmrckpt_8c_source.html#l02842">kmrckpt.c:2842</a></div></div>
-<div class="ttc" id="kmr_8h_html_af45076291f415e5137cecf882e77bcaa"><div class="ttname"><a href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a></div><div class="ttdeci">int kmr_add_kv(KMR_KVS *kvs, const struct kmr_kv_box kv)</div><div class="ttdoc">Adds a key-value pair. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00734">kmrbase.c:734</a></div></div>
-<div class="ttc" id="kmr_8h_html_a5c5006dd70e399d546c5345142f72f6d"><div class="ttname"><a href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a></div><div class="ttdeci">#define kmr_create_kvs(MR, KF, VF)</div><div class="ttdoc">Makes a new key-value stream (of type KMR_KVS) with the specified field datatypes. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00073">kmr.h:73</a></div></div>
-<div class="ttc" id="kmr_8h_html_a194686701b3c46a869fe9eb2cab93252"><div class="ttname"><a href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a></div><div class="ttdeci">int kmr_shuffle(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Shuffles key-value pairs to the appropriate destination ranks. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01961">kmrbase.c:1961</a></div></div>
+<div class="ttc" id="kmr_8h_html_af45076291f415e5137cecf882e77bcaa"><div class="ttname"><a href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a></div><div class="ttdeci">int kmr_add_kv(KMR_KVS *kvs, const struct kmr_kv_box kv)</div><div class="ttdoc">Adds a key-value pair. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00742">kmrbase.c:742</a></div></div>
+<div class="ttc" id="kmr_8h_html_a5c5006dd70e399d546c5345142f72f6d"><div class="ttname"><a href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a></div><div class="ttdeci">#define kmr_create_kvs(MR, KF, VF)</div><div class="ttdoc">Makes a new key-value stream (of type KMR_KVS) with the specified field datatypes. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00068">kmr.h:68</a></div></div>
+<div class="ttc" id="kmr_8h_html_a194686701b3c46a869fe9eb2cab93252"><div class="ttname"><a href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a></div><div class="ttdeci">int kmr_shuffle(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Shuffles key-value pairs to the appropriate destination ranks. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01992">kmrbase.c:1992</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_addf3ca544b4480621bc2ae6bcd151130"><div class="ttname"><a href="kmrimpl_8h.html#addf3ca544b4480621bc2ae6bcd151130">kmr_ckpt_enabled</a></div><div class="ttdeci">int kmr_ckpt_enabled(KMR *)</div><div class="ttdoc">Check if checkpoint/restart is enabled. </div><div class="ttdef"><b>Definition:</b> <a href="kmrckpt_8c_source.html#l02475">kmrckpt.c:2475</a></div></div>
-<div class="ttc" id="kmr_8h_html_a4d03aa1b36d67910d6214c286553f9d5"><div class="ttname"><a href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a></div><div class="ttdeci">int kmr_copy_to_array_fn(const struct kmr_kv_box kv, const KMR_KVS *kvi, KMR_KVS *kvo, void *arg, const long i)</div><div class="ttdoc">Copies the entry in the array. </div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l00773">kmrutil.c:773</a></div></div>
-<div class="ttc" id="kmr_8h_html_ac07e8d3c6b4a229295ed3f9d982d1a04"><div class="ttname"><a href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a></div><div class="ttdeci">int kmr_add_kv_done(KMR_KVS *kvs)</div><div class="ttdoc">Marks finished adding key-value pairs. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00862">kmrbase.c:862</a></div></div>
-<div class="ttc" id="structkmr__ctx_html"><div class="ttname"><a href="structkmr__ctx.html">kmr_ctx</a></div><div class="ttdoc">KMR Context. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00222">kmr.h:222</a></div></div>
-<div class="ttc" id="kmr_8h_html_a642656490e91b16d31f4253e35d8e03c"><div class="ttname"><a href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a></div><div class="ttdeci">int kmr_free_kvs(KMR_KVS *kvs)</div><div class="ttdoc">Releases a key-value stream (type KMR_KVS). </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00604">kmrbase.c:604</a></div></div>
+<div class="ttc" id="kmr_8h_html_a4d03aa1b36d67910d6214c286553f9d5"><div class="ttname"><a href="kmr_8h.html#a4d03aa1b36d67910d6214c286553f9d5">kmr_copy_to_array_fn</a></div><div class="ttdeci">int kmr_copy_to_array_fn(const struct kmr_kv_box kv, const KMR_KVS *kvi, KMR_KVS *kvo, void *arg, const long i)</div><div class="ttdoc">Copies the entry in the array. </div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l00934">kmrutil.c:934</a></div></div>
+<div class="ttc" id="kmr_8h_html_ac07e8d3c6b4a229295ed3f9d982d1a04"><div class="ttname"><a href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a></div><div class="ttdeci">int kmr_add_kv_done(KMR_KVS *kvs)</div><div class="ttdoc">Marks finished adding key-value pairs. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00872">kmrbase.c:872</a></div></div>
+<div class="ttc" id="structkmr__ctx_html"><div class="ttname"><a href="structkmr__ctx.html">kmr_ctx</a></div><div class="ttdoc">KMR Context. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00217">kmr.h:217</a></div></div>
+<div class="ttc" id="kmr_8h_html_a642656490e91b16d31f4253e35d8e03c"><div class="ttname"><a href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a></div><div class="ttdeci">int kmr_free_kvs(KMR_KVS *kvs)</div><div class="ttdoc">Releases a key-value stream (type KMR_KVS). </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00612">kmrbase.c:612</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_a1e5f414c1c33362d21dc0d7ebfc4a9cf"><div class="ttname"><a href="kmrimpl_8h.html#a1e5f414c1c33362d21dc0d7ebfc4a9cf">kmr_ckpt_save_kvo_whole</a></div><div class="ttdeci">void kmr_ckpt_save_kvo_whole(KMR *, KMR_KVS *)</div><div class="ttdoc">It saves all key-value pairs in the output KVS to a checkpoint data file. </div><div class="ttdef"><b>Definition:</b> <a href="kmrckpt_8c_source.html#l02635">kmrckpt.c:2635</a></div></div>
-<div class="ttc" id="kmr_8h_html_a0d4f610f2dcd147372fc8798171da01b"><div class="ttname"><a href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a></div><div class="ttdeci">kmr_kv_field</div><div class="ttdoc">Datatypes of Keys or Values. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00317">kmr.h:317</a></div></div>
-<div class="ttc" id="kmr_8h_html_a7bb545fb804c554dfc05baab4c8abf8d"><div class="ttname"><a href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a></div><div class="ttdeci">#define kmr_map(KVI, KVO, ARG, OPT, M)</div><div class="ttdoc">Maps simply. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00084">kmr.h:84</a></div></div>
-<div class="ttc" id="structkmr__kv__box_html"><div class="ttname"><a href="structkmr__kv__box.html">kmr_kv_box</a></div><div class="ttdoc">Handy Copy of a Key-Value Field. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00349">kmr.h:349</a></div></div>
+<div class="ttc" id="kmr_8h_html_a0d4f610f2dcd147372fc8798171da01b"><div class="ttname"><a href="kmr_8h.html#a0d4f610f2dcd147372fc8798171da01b">kmr_kv_field</a></div><div class="ttdeci">kmr_kv_field</div><div class="ttdoc">Datatypes of Keys or Values. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00315">kmr.h:315</a></div></div>
+<div class="ttc" id="kmr_8h_html_a7bb545fb804c554dfc05baab4c8abf8d"><div class="ttname"><a href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a></div><div class="ttdeci">#define kmr_map(KVI, KVO, ARG, OPT, M)</div><div class="ttdoc">Maps simply. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00079">kmr.h:79</a></div></div>
+<div class="ttc" id="structkmr__kv__box_html"><div class="ttname"><a href="structkmr__kv__box.html">kmr_kv_box</a></div><div class="ttdoc">Handy Copy of a Key-Value Field. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00348">kmr.h:348</a></div></div>
 <div class="ttc" id="kmrfefs_8h_html_af4dbc319819a2ff7b6d78776354ba50f"><div class="ttname"><a href="kmrfefs_8h.html#af4dbc319819a2ff7b6d78776354ba50f">kmr_fefs_get_stripe</a></div><div class="ttdeci">int kmr_fefs_get_stripe(const char *dir, const char *file, struct kmr_fefs_stripe *stripe, int *err, _Bool debug_and_dump)</div><div class="ttdoc">Gets the OBDIDX information on the file or directory. </div><div class="ttdef"><b>Definition:</b> <a href="kmrfefs_8c_source.html#l00082">kmrfefs.c:82</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_aa3516d8c2ee13779f9096dc358397697"><div class="ttname"><a href="kmrimpl_8h.html#aa3516d8c2ee13779f9096dc358397697">kmr_ckpt_disable_ckpt</a></div><div class="ttdeci">int kmr_ckpt_disable_ckpt(KMR *)</div><div class="ttdoc">It temporally disables checkpoint/restart. </div><div class="ttdef"><b>Definition:</b> <a href="kmrckpt_8c_source.html#l02491">kmrckpt.c:2491</a></div></div>
 <div class="ttc" id="kmrfefs_8h_html"><div class="ttname"><a href="kmrfefs_8h.html">kmrfefs.h</a></div><div class="ttdoc">Lustre File System (or Fujitsu FEFS) Support. </div></div>
 <div class="ttc" id="kmr_8h_html"><div class="ttname"><a href="kmr_8h.html">kmr.h</a></div><div class="ttdoc">KMR Interface. </div></div>
-<div class="ttc" id="kmr_8h_html_a64d9a689d79d64bcfa10d61c1d335ee7"><div class="ttname"><a href="kmr_8h.html#a64d9a689d79d64bcfa10d61c1d335ee7">kmr_replicate</a></div><div class="ttdeci">int kmr_replicate(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gat...</div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l02098">kmrbase.c:2098</a></div></div>
+<div class="ttc" id="kmr_8h_html_a64d9a689d79d64bcfa10d61c1d335ee7"><div class="ttname"><a href="kmr_8h.html#a64d9a689d79d64bcfa10d61c1d335ee7">kmr_replicate</a></div><div class="ttdeci">int kmr_replicate(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gat...</div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l02127">kmrbase.c:2127</a></div></div>
 <div class="ttc" id="structio__grp_html"><div class="ttname"><a href="structio__grp.html">io_grp</a></div><div class="ttdef"><b>Definition:</b> <a href="kmriolb_8c_source.html#l00026">kmriolb.c:26</a></div></div>
-<div class="ttc" id="kmr_8h_html_acbb5934021b3cd6adc54ad66c615cbba"><div class="ttname"><a href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a></div><div class="ttdeci">int kmr_local_element_count(KMR_KVS *kvs, long *v)</div><div class="ttdoc">Gets the number of key-value pairs locally on each rank. </div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l00325">kmrutil.c:325</a></div></div>
+<div class="ttc" id="kmr_8h_html_acbb5934021b3cd6adc54ad66c615cbba"><div class="ttname"><a href="kmr_8h.html#acbb5934021b3cd6adc54ad66c615cbba">kmr_local_element_count</a></div><div class="ttdeci">int kmr_local_element_count(KMR_KVS *kvs, long *v)</div><div class="ttdoc">Gets the number of key-value pairs locally on each rank. </div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l00349">kmrutil.c:349</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_a27f917656650b63fa2fc5f28172e9c66"><div class="ttname"><a href="kmrimpl_8h.html#a27f917656650b63fa2fc5f28172e9c66">kmr_ckpt_enable_ckpt</a></div><div class="ttdeci">int kmr_ckpt_enable_ckpt(KMR *, int)</div><div class="ttdoc">It temporally enables checkpoint/restart which has been disabled by calling kmr_ckpt_disable_ckpt(). </div><div class="ttdef"><b>Definition:</b> <a href="kmrckpt_8c_source.html#l02512">kmrckpt.c:2512</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 8 2015 15:14:36 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 22 2015 18:25:25 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

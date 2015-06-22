@@ -159,6 +159,8 @@ Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__local__element__count.html">kmrf::kmr_local_element_count</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the element count local on each node.  <a href="interfacekmrf_1_1kmr__local__element__count.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__map__once__ff.html">kmrf::kmr_map_once_ff</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__map__via__spawn__ff.html">kmrf::kmr_map_via_spawn_ff</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__mapfn.html">kmrf::kmr_mapfn</a></td></tr>
@@ -174,6 +176,8 @@ Data Types</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of reduce-function.  <a href="interfacekmrf_1_1kmr__redfn.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__replicate__ff.html">kmrf::kmr_replicate_ff</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__reverse__ff.html">kmrf::kmr_reverse_ff</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacekmrf_1_1kmr__shuffle__ff.html">kmrf::kmr_shuffle_ff</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,6 +223,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aaf8f8f7c0aa46277c0d71f2c96049021"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><b>kmrf::kmr_map_on_rank_zero</b> (kvo, p, opt, m)</td></tr>
 <tr class="memdesc:aaf8f8f7c0aa46277c0d71f2c96049021"><td class="mdescLeft">&#160;</td><td class="mdescRight">(See kmr_map_on_rank_zero() in C).  <a href="#aaf8f8f7c0aa46277c0d71f2c96049021">More...</a><br /></td></tr>
 <tr class="separator:aaf8f8f7c0aa46277c0d71f2c96049021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a807966e9a37762083de68fa415931ec6"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><b>kmrf::kmr_map_once</b> (kvo, p, opt, rankzeroonly, m)</td></tr>
+<tr class="memdesc:a807966e9a37762083de68fa415931ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">(See kmr_map_once() in C).  <a href="#a807966e9a37762083de68fa415931ec6">More...</a><br /></td></tr>
+<tr class="separator:a807966e9a37762083de68fa415931ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2fcadd401f3ecc20399a324b60f8168"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><b>kmrf::kmr_map_via_spawn</b> (kvi, kvo, p, info, opt, m)</td></tr>
 <tr class="memdesc:ac2fcadd401f3ecc20399a324b60f8168"><td class="mdescLeft">&#160;</td><td class="mdescRight">(See kmr_map_via_spawn() in C).  <a href="#ac2fcadd401f3ecc20399a324b60f8168">More...</a><br /></td></tr>
 <tr class="separator:ac2fcadd401f3ecc20399a324b60f8168"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,6 +238,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ac634b140e3a2010e5c5ed92c5278474a"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><b>kmrf::kmr_replicate</b> (kvi, kvo, opt)</td></tr>
 <tr class="memdesc:ac634b140e3a2010e5c5ed92c5278474a"><td class="mdescLeft">&#160;</td><td class="mdescRight">(See kmr_replicate() in C).  <a href="#ac634b140e3a2010e5c5ed92c5278474a">More...</a><br /></td></tr>
 <tr class="separator:ac634b140e3a2010e5c5ed92c5278474a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ababeb6543d6c9bedf71d76727e345d82"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><b>kmrf::kmr_reverse</b> (kvi, kvo, opt)</td></tr>
+<tr class="memdesc:ababeb6543d6c9bedf71d76727e345d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">(See kmr_reverse() in C).  <a href="#ababeb6543d6c9bedf71d76727e345d82">More...</a><br /></td></tr>
+<tr class="separator:ababeb6543d6c9bedf71d76727e345d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeab34ab272e0859c837d8e28ef218eb5"><td class="memItemLeft" align="right" valign="top">integer(c_int) function&#160;</td><td class="memItemRight" valign="bottom"><b>kmrf::kmr_shuffle</b> (kvi, kvo, opt)</td></tr>
 <tr class="memdesc:aeab34ab272e0859c837d8e28ef218eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">(See kmr_shuffle() in C).  <a href="#aeab34ab272e0859c837d8e28ef218eb5">More...</a><br /></td></tr>
 <tr class="separator:aeab34ab272e0859c837d8e28ef218eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -306,7 +316,7 @@ integer(c_int), parameter&#160;</td><td class="memItemRight" valign="bottom"><b>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 8 2015 15:14:37 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 22 2015 18:25:26 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

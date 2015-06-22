@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['k_5fmeans',['K_Means',['../classkmeanspy_1_1_k___means.html',1,'kmeanspy']]],
   ['kmeans_5fmapdata_5ft',['kmeans_mapdata_t',['../structkmeans__mapdata__t.html',1,'']]],
   ['kmeans_5ft',['kmeans_t',['../structkmeans__t.html',1,'']]],
   ['kmr_5fadd_5fkv',['kmr_add_kv',['../interfacekmrf_1_1kmr__add__kv.html',1,'kmrf']]],
@@ -59,6 +60,7 @@ var searchData=
   ['kmr_5flov_5fost',['kmr_lov_ost',['../structkmr__lov__ost.html',1,'']]],
   ['kmr_5fmap_5fms_5fcommands_5fargument',['kmr_map_ms_commands_argument',['../structkmr__map__ms__commands__argument.html',1,'']]],
   ['kmr_5fmap_5fms_5fstate',['kmr_map_ms_state',['../structkmr__map__ms__state.html',1,'']]],
+  ['kmr_5fmap_5fonce_5fff',['kmr_map_once_ff',['../interfacekmrf_1_1kmr__map__once__ff.html',1,'kmrf']]],
   ['kmr_5fmap_5fvia_5fspawn_5fff',['kmr_map_via_spawn_ff',['../interfacekmrf_1_1kmr__map__via__spawn__ff.html',1,'kmrf']]],
   ['kmr_5fmapfn',['kmr_mapfn',['../interfacekmrf_1_1kmr__mapfn.html',1,'kmrf']]],
   ['kmr_5fntuple',['kmr_ntuple',['../structkmr__ntuple.html',1,'']]],
@@ -70,6 +72,7 @@ var searchData=
   ['kmr_5franking_5fto_5frank',['kmr_ranking_to_rank',['../structkmr__ranking__to__rank.html',1,'']]],
   ['kmr_5fredfn',['kmr_redfn',['../interfacekmrf_1_1kmr__redfn.html',1,'kmrf']]],
   ['kmr_5freplicate_5fff',['kmr_replicate_ff',['../interfacekmrf_1_1kmr__replicate__ff.html',1,'kmrf']]],
+  ['kmr_5freverse_5fff',['kmr_reverse_ff',['../interfacekmrf_1_1kmr__reverse__ff.html',1,'kmrf']]],
   ['kmr_5fshuffle_5fff',['kmr_shuffle_ff',['../interfacekmrf_1_1kmr__shuffle__ff.html',1,'kmrf']]],
   ['kmr_5fsort_5fff',['kmr_sort_ff',['../interfacekmrf_1_1kmr__sort__ff.html',1,'kmrf']]],
   ['kmr_5fsort_5flocally_5fff',['kmr_sort_locally_ff',['../interfacekmrf_1_1kmr__sort__locally__ff.html',1,'kmrf']]],
