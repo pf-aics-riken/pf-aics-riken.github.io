@@ -1235,261 +1235,285 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l01145"></a><span class="lineno"> 1145</span>&#160;</div>
 <div class="line"><a name="l01146"></a><span class="lineno"> 1146</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs1);</div>
 <div class="line"><a name="l01147"></a><span class="lineno"> 1147</span>&#160;</div>
-<div class="line"><a name="l01148"></a><span class="lineno"> 1148</span>&#160;    <a class="code" href="kmr_8h.html#ad7d12efd914c8b60a54eb82b7a930ea7">kmr_free_context</a>(mr);</div>
-<div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160;}</div>
-<div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;</div>
-<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(<span class="keywordtype">void</span> *a, <span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> es, <span class="keywordtype">int</span> depth);</div>
-<div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160;</div>
-<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;<span class="comment">/* Check isort() utility. */</span></div>
-<div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160;</div>
-<div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160;simple7(<span class="keywordtype">int</span> nprocs, <span class="keywordtype">int</span> rank)</div>
-<div class="line"><a name="l01157"></a><span class="lineno"> 1157</span>&#160;{</div>
-<div class="line"><a name="l01158"></a><span class="lineno"> 1158</span>&#160;    MPI_Barrier(MPI_COMM_WORLD);</div>
-<div class="line"><a name="l01159"></a><span class="lineno"> 1159</span>&#160;    usleep(50 * 1000);</div>
-<div class="line"><a name="l01160"></a><span class="lineno"> 1160</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;CHECK ISORT UTILITY (local sort)...\n&quot;</span>);}</div>
-<div class="line"><a name="l01161"></a><span class="lineno"> 1161</span>&#160;    fflush(0);</div>
-<div class="line"><a name="l01162"></a><span class="lineno"> 1162</span>&#160;    usleep(50 * 1000);</div>
-<div class="line"><a name="l01163"></a><span class="lineno"> 1163</span>&#160;</div>
-<div class="line"><a name="l01164"></a><span class="lineno"> 1164</span>&#160;    <span class="keywordtype">int</span> setntheads = 1;</div>
-<div class="line"><a name="l01165"></a><span class="lineno"> 1165</span>&#160;</div>
-<div class="line"><a name="l01166"></a><span class="lineno"> 1166</span>&#160;<span class="preprocessor">#ifdef __K</span></div>
-<div class="line"><a name="l01167"></a><span class="lineno"> 1167</span>&#160;    <span class="keywordtype">char</span> *fastomp = getenv(<span class="stringliteral">&quot;FLIB_FASTOMP&quot;</span>);</div>
-<div class="line"><a name="l01168"></a><span class="lineno"> 1168</span>&#160;    <span class="keywordflow">if</span> (!(fastomp != 0 &amp;&amp; strcmp(fastomp, <span class="stringliteral">&quot;FALSE&quot;</span>) == 0)) {</div>
-<div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Set environment variable FLIB_FASTOMP=FALSE&quot;</span></div>
-<div class="line"><a name="l01170"></a><span class="lineno"> 1170</span>&#160;                               <span class="stringliteral">&quot; and run again.  Otherwise,&quot;</span></div>
-<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;                               <span class="stringliteral">&quot; omp_set_num_threads() is ignored.\n&quot;</span>);}</div>
-<div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;        fflush(0);</div>
-<div class="line"><a name="l01173"></a><span class="lineno"> 1173</span>&#160;        setntheads = 0;</div>
-<div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160;    }</div>
-<div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;</div>
-<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;    <span class="comment">/* Check with length 20. */</span></div>
-<div class="line"><a name="l01178"></a><span class="lineno"> 1178</span>&#160;</div>
-<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;    <span class="keywordflow">if</span> (1) {</div>
-<div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160;        <span class="keywordtype">long</span> a0[20] = {19, 18, 17, 16, 15, 14, 13, 12, 11, 10,</div>
-<div class="line"><a name="l01181"></a><span class="lineno"> 1181</span>&#160;                       9, 8, 7, 6, 5, 4, 3, 2, 1, 0};</div>
-<div class="line"><a name="l01182"></a><span class="lineno"> 1182</span>&#160;        <span class="keywordtype">size_t</span> n0 = (<span class="keyword">sizeof</span>(a0) / <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>));</div>
-<div class="line"><a name="l01183"></a><span class="lineno"> 1183</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)n0; i++) {</div>
-<div class="line"><a name="l01184"></a><span class="lineno"> 1184</span>&#160;            a0[i] += 1000000000000;</div>
-<div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;        }</div>
+<div class="line"><a name="l01148"></a><span class="lineno"> 1148</span>&#160;    <span class="comment">/* Check using KVS after inspecting by kmr_take_one(). */</span></div>
+<div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160;</div>
+<div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;    MPI_Barrier(MPI_COMM_WORLD);</div>
+<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;    usleep(50 * 1000);</div>
+<div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;CHECK KMR_TAKE_ONE()...\n&quot;</span>);}</div>
+<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;    fflush(0);</div>
+<div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160;    usleep(50 * 1000);</div>
+<div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160;</div>
+<div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">long</span> ONE = 1;    </div>
+<div class="line"><a name="l01157"></a><span class="lineno"> 1157</span>&#160;</div>
+<div class="line"><a name="l01158"></a><span class="lineno"> 1158</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs4 = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_INTEGER);</div>
+<div class="line"><a name="l01159"></a><span class="lineno"> 1159</span>&#160;    <a class="code" href="kmr_8h.html#a815a3eafd8bde396d34bbf5f39ba9783">kmr_map_once</a>(kvs4, (<span class="keywordtype">void</span> *)&amp;ONE, kmr_noopt, 0, addkeys6);</div>
+<div class="line"><a name="l01160"></a><span class="lineno"> 1160</span>&#160;    </div>
+<div class="line"><a name="l01161"></a><span class="lineno"> 1161</span>&#160;    <span class="keyword">struct </span><a class="code" href="structkmr__kv__box.html">kmr_kv_box</a> kv;</div>
+<div class="line"><a name="l01162"></a><span class="lineno"> 1162</span>&#160;    <a class="code" href="kmr_8h.html#a89cc00c0639b9d904e1aca7035c30f47">kmr_take_one</a>(kvs4, &amp;kv);</div>
+<div class="line"><a name="l01163"></a><span class="lineno"> 1163</span>&#160;    assert(kv.k.i == 0 &amp;&amp; kv.v.i == 0);</div>
+<div class="line"><a name="l01164"></a><span class="lineno"> 1164</span>&#160;</div>
+<div class="line"><a name="l01165"></a><span class="lineno"> 1165</span>&#160;    <span class="keywordtype">long</span> calls4 = 0;</div>
+<div class="line"><a name="l01166"></a><span class="lineno"> 1166</span>&#160;    <a class="code" href="unionkmr__kvs.html">KMR_KVS</a> *kvs5 = <a class="code" href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a>(mr, KMR_KV_INTEGER, KMR_KV_INTEGER);</div>
+<div class="line"><a name="l01167"></a><span class="lineno"> 1167</span>&#160;    <a class="code" href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a>(kvs4, kvs5, &amp;calls4, kmr_noopt, addeach6);</div>
+<div class="line"><a name="l01168"></a><span class="lineno"> 1168</span>&#160;</div>
+<div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160;    <a class="code" href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a>(kvs5);</div>
+<div class="line"><a name="l01170"></a><span class="lineno"> 1170</span>&#160;</div>
+<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;    <a class="code" href="kmr_8h.html#ad7d12efd914c8b60a54eb82b7a930ea7">kmr_free_context</a>(mr);</div>
+<div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;}</div>
+<div class="line"><a name="l01173"></a><span class="lineno"> 1173</span>&#160;</div>
+<div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(<span class="keywordtype">void</span> *a, <span class="keywordtype">size_t</span> n, <span class="keywordtype">size_t</span> es, <span class="keywordtype">int</span> depth);</div>
+<div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160;</div>
+<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;<span class="comment">/* Check isort() utility. */</span></div>
+<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;</div>
+<div class="line"><a name="l01178"></a><span class="lineno"> 1178</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;simple7(<span class="keywordtype">int</span> nprocs, <span class="keywordtype">int</span> rank)</div>
+<div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160;{</div>
+<div class="line"><a name="l01181"></a><span class="lineno"> 1181</span>&#160;    MPI_Barrier(MPI_COMM_WORLD);</div>
+<div class="line"><a name="l01182"></a><span class="lineno"> 1182</span>&#160;    usleep(50 * 1000);</div>
+<div class="line"><a name="l01183"></a><span class="lineno"> 1183</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;CHECK ISORT UTILITY (local sort)...\n&quot;</span>);}</div>
+<div class="line"><a name="l01184"></a><span class="lineno"> 1184</span>&#160;    fflush(0);</div>
+<div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;    usleep(50 * 1000);</div>
 <div class="line"><a name="l01186"></a><span class="lineno"> 1186</span>&#160;</div>
-<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting data N=%zd\n&quot;</span>, n0);}</div>
-<div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160;        fflush(0);</div>
-<div class="line"><a name="l01189"></a><span class="lineno"> 1189</span>&#160;</div>
-<div class="line"><a name="l01190"></a><span class="lineno"> 1190</span>&#160;        <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(a0, n0, <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>), 0);</div>
-<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;</div>
-<div class="line"><a name="l01192"></a><span class="lineno"> 1192</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)n0; i++) {</div>
-<div class="line"><a name="l01193"></a><span class="lineno"> 1193</span>&#160;            assert(a0[i] == (i + 1000000000000));</div>
-<div class="line"><a name="l01194"></a><span class="lineno"> 1194</span>&#160;        }</div>
-<div class="line"><a name="l01195"></a><span class="lineno"> 1195</span>&#160;</div>
-<div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160;        <span class="comment">//if (rank == 0) {printf(&quot;OK\n&quot;);}</span></div>
-<div class="line"><a name="l01197"></a><span class="lineno"> 1197</span>&#160;        <span class="comment">//fflush(0);</span></div>
-<div class="line"><a name="l01198"></a><span class="lineno"> 1198</span>&#160;    }</div>
+<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;    <span class="keywordtype">int</span> setntheads = 1;</div>
+<div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160;</div>
+<div class="line"><a name="l01189"></a><span class="lineno"> 1189</span>&#160;<span class="preprocessor">#ifdef __K</span></div>
+<div class="line"><a name="l01190"></a><span class="lineno"> 1190</span>&#160;    <span class="keywordtype">char</span> *fastomp = getenv(<span class="stringliteral">&quot;FLIB_FASTOMP&quot;</span>);</div>
+<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;    <span class="keywordflow">if</span> (!(fastomp != 0 &amp;&amp; strcmp(fastomp, <span class="stringliteral">&quot;FALSE&quot;</span>) == 0)) {</div>
+<div class="line"><a name="l01192"></a><span class="lineno"> 1192</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Set environment variable FLIB_FASTOMP=FALSE&quot;</span></div>
+<div class="line"><a name="l01193"></a><span class="lineno"> 1193</span>&#160;                               <span class="stringliteral">&quot; and run again.  Otherwise,&quot;</span></div>
+<div class="line"><a name="l01194"></a><span class="lineno"> 1194</span>&#160;                               <span class="stringliteral">&quot; omp_set_num_threads() is ignored.\n&quot;</span>);}</div>
+<div class="line"><a name="l01195"></a><span class="lineno"> 1195</span>&#160;        fflush(0);</div>
+<div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160;        setntheads = 0;</div>
+<div class="line"><a name="l01197"></a><span class="lineno"> 1197</span>&#160;    }</div>
+<div class="line"><a name="l01198"></a><span class="lineno"> 1198</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l01199"></a><span class="lineno"> 1199</span>&#160;</div>
-<div class="line"><a name="l01200"></a><span class="lineno"> 1200</span>&#160;    <span class="comment">/* Check with length 100M. */</span></div>
+<div class="line"><a name="l01200"></a><span class="lineno"> 1200</span>&#160;    <span class="comment">/* Check with length 20. */</span></div>
 <div class="line"><a name="l01201"></a><span class="lineno"> 1201</span>&#160;</div>
 <div class="line"><a name="l01202"></a><span class="lineno"> 1202</span>&#160;    <span class="keywordflow">if</span> (1) {</div>
-<div class="line"><a name="l01203"></a><span class="lineno"> 1203</span>&#160;        <span class="keywordtype">long</span> n1 = 100000000; <span class="comment">/*100M*/</span></div>
-<div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160;        <span class="keywordtype">long</span> *a1 = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">long</span>) * (<span class="keywordtype">size_t</span>)n1);</div>
-<div class="line"><a name="l01205"></a><span class="lineno"> 1205</span>&#160;        <span class="keywordflow">if</span> (a1 == 0) {</div>
-<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;            perror(<span class="stringliteral">&quot;malloc&quot;</span>);</div>
-<div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160;            MPI_Abort(MPI_COMM_WORLD, 1);</div>
+<div class="line"><a name="l01203"></a><span class="lineno"> 1203</span>&#160;        <span class="keywordtype">long</span> a0[20] = {19, 18, 17, 16, 15, 14, 13, 12, 11, 10,</div>
+<div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160;                       9, 8, 7, 6, 5, 4, 3, 2, 1, 0};</div>
+<div class="line"><a name="l01205"></a><span class="lineno"> 1205</span>&#160;        <span class="keywordtype">size_t</span> n0 = (<span class="keyword">sizeof</span>(a0) / <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>));</div>
+<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)n0; i++) {</div>
+<div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160;            a0[i] += 1000000000000;</div>
 <div class="line"><a name="l01208"></a><span class="lineno"> 1208</span>&#160;        }</div>
 <div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160;</div>
-<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting data N=%zd\n&quot;</span>, n1);}</div>
+<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting data N=%zd\n&quot;</span>, n0);}</div>
 <div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;        fflush(0);</div>
 <div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160;</div>
-<div class="line"><a name="l01213"></a><span class="lineno"> 1213</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Generating random numbers...\n&quot;</span>);}</div>
-<div class="line"><a name="l01214"></a><span class="lineno"> 1214</span>&#160;        fflush(0);</div>
-<div class="line"><a name="l01215"></a><span class="lineno"> 1215</span>&#160;</div>
-<div class="line"><a name="l01216"></a><span class="lineno"> 1216</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n1; i++) {</div>
-<div class="line"><a name="l01217"></a><span class="lineno"> 1217</span>&#160;            a1[i] = ((((long)rand()) &lt;&lt; 31) ^ ((long)rand()));</div>
-<div class="line"><a name="l01218"></a><span class="lineno"> 1218</span>&#160;        }</div>
-<div class="line"><a name="l01219"></a><span class="lineno"> 1219</span>&#160;</div>
-<div class="line"><a name="l01220"></a><span class="lineno"> 1220</span>&#160;        <span class="keywordflow">if</span> (0) {</div>
-<div class="line"><a name="l01221"></a><span class="lineno"> 1221</span>&#160;            printf(<span class="stringliteral">&quot;Problem...\n&quot;</span>);</div>
-<div class="line"><a name="l01222"></a><span class="lineno"> 1222</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; 10; i++) {</div>
-<div class="line"><a name="l01223"></a><span class="lineno"> 1223</span>&#160;                printf(<span class="stringliteral">&quot;%ld\n&quot;</span>, a1[i]);</div>
-<div class="line"><a name="l01224"></a><span class="lineno"> 1224</span>&#160;            }</div>
-<div class="line"><a name="l01225"></a><span class="lineno"> 1225</span>&#160;            printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160;        }</div>
-<div class="line"><a name="l01227"></a><span class="lineno"> 1227</span>&#160;</div>
-<div class="line"><a name="l01228"></a><span class="lineno"> 1228</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting (threads=1)...\n&quot;</span>);}</div>
-<div class="line"><a name="l01229"></a><span class="lineno"> 1229</span>&#160;        fflush(0);</div>
-<div class="line"><a name="l01230"></a><span class="lineno"> 1230</span>&#160;</div>
-<div class="line"><a name="l01231"></a><span class="lineno"> 1231</span>&#160;        <span class="keywordtype">double</span> t0 = wtime();</div>
-<div class="line"><a name="l01232"></a><span class="lineno"> 1232</span>&#160;        <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(a1, (<span class="keywordtype">size_t</span>)n1, <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>), 0);</div>
-<div class="line"><a name="l01233"></a><span class="lineno"> 1233</span>&#160;        <span class="keywordtype">double</span> t1 = wtime();</div>
-<div class="line"><a name="l01234"></a><span class="lineno"> 1234</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;time=%f\n&quot;</span>, (t1 - t0));}</div>
-<div class="line"><a name="l01235"></a><span class="lineno"> 1235</span>&#160;        fflush(0);</div>
-<div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160;</div>
-<div class="line"><a name="l01237"></a><span class="lineno"> 1237</span>&#160;        <span class="keywordflow">if</span> (0) {</div>
-<div class="line"><a name="l01238"></a><span class="lineno"> 1238</span>&#160;            printf(<span class="stringliteral">&quot;Result...\n&quot;</span>);</div>
-<div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; 10; i++) {</div>
-<div class="line"><a name="l01240"></a><span class="lineno"> 1240</span>&#160;                printf(<span class="stringliteral">&quot;%ld\n&quot;</span>, a1[i]);</div>
-<div class="line"><a name="l01241"></a><span class="lineno"> 1241</span>&#160;            }</div>
-<div class="line"><a name="l01242"></a><span class="lineno"> 1242</span>&#160;            printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l01243"></a><span class="lineno"> 1243</span>&#160;        }</div>
-<div class="line"><a name="l01244"></a><span class="lineno"> 1244</span>&#160;</div>
-<div class="line"><a name="l01245"></a><span class="lineno"> 1245</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Checking...\n&quot;</span>);}</div>
-<div class="line"><a name="l01246"></a><span class="lineno"> 1246</span>&#160;        <span class="keywordtype">long</span> lb = LONG_MIN;</div>
-<div class="line"><a name="l01247"></a><span class="lineno"> 1247</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n1; i++) {</div>
-<div class="line"><a name="l01248"></a><span class="lineno"> 1248</span>&#160;            assert(a1[i] &gt;= lb);</div>
-<div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160;            <span class="keywordflow">if</span> (a1[i] &gt; lb) {</div>
-<div class="line"><a name="l01250"></a><span class="lineno"> 1250</span>&#160;                lb = a1[i];</div>
-<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160;            }</div>
-<div class="line"><a name="l01252"></a><span class="lineno"> 1252</span>&#160;        }</div>
+<div class="line"><a name="l01213"></a><span class="lineno"> 1213</span>&#160;        <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(a0, n0, <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>), 0);</div>
+<div class="line"><a name="l01214"></a><span class="lineno"> 1214</span>&#160;</div>
+<div class="line"><a name="l01215"></a><span class="lineno"> 1215</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)n0; i++) {</div>
+<div class="line"><a name="l01216"></a><span class="lineno"> 1216</span>&#160;            assert(a0[i] == (i + 1000000000000));</div>
+<div class="line"><a name="l01217"></a><span class="lineno"> 1217</span>&#160;        }</div>
+<div class="line"><a name="l01218"></a><span class="lineno"> 1218</span>&#160;</div>
+<div class="line"><a name="l01219"></a><span class="lineno"> 1219</span>&#160;        <span class="comment">//if (rank == 0) {printf(&quot;OK\n&quot;);}</span></div>
+<div class="line"><a name="l01220"></a><span class="lineno"> 1220</span>&#160;        <span class="comment">//fflush(0);</span></div>
+<div class="line"><a name="l01221"></a><span class="lineno"> 1221</span>&#160;    }</div>
+<div class="line"><a name="l01222"></a><span class="lineno"> 1222</span>&#160;</div>
+<div class="line"><a name="l01223"></a><span class="lineno"> 1223</span>&#160;    <span class="comment">/* Check with length 100M. */</span></div>
+<div class="line"><a name="l01224"></a><span class="lineno"> 1224</span>&#160;</div>
+<div class="line"><a name="l01225"></a><span class="lineno"> 1225</span>&#160;    <span class="keywordflow">if</span> (1) {</div>
+<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160;        <span class="keywordtype">long</span> n1 = 100000000; <span class="comment">/*100M*/</span></div>
+<div class="line"><a name="l01227"></a><span class="lineno"> 1227</span>&#160;        <span class="keywordtype">long</span> *a1 = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">long</span>) * (<span class="keywordtype">size_t</span>)n1);</div>
+<div class="line"><a name="l01228"></a><span class="lineno"> 1228</span>&#160;        <span class="keywordflow">if</span> (a1 == 0) {</div>
+<div class="line"><a name="l01229"></a><span class="lineno"> 1229</span>&#160;            perror(<span class="stringliteral">&quot;malloc&quot;</span>);</div>
+<div class="line"><a name="l01230"></a><span class="lineno"> 1230</span>&#160;            MPI_Abort(MPI_COMM_WORLD, 1);</div>
+<div class="line"><a name="l01231"></a><span class="lineno"> 1231</span>&#160;        }</div>
+<div class="line"><a name="l01232"></a><span class="lineno"> 1232</span>&#160;</div>
+<div class="line"><a name="l01233"></a><span class="lineno"> 1233</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting data N=%zd\n&quot;</span>, n1);}</div>
+<div class="line"><a name="l01234"></a><span class="lineno"> 1234</span>&#160;        fflush(0);</div>
+<div class="line"><a name="l01235"></a><span class="lineno"> 1235</span>&#160;</div>
+<div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Generating random numbers...\n&quot;</span>);}</div>
+<div class="line"><a name="l01237"></a><span class="lineno"> 1237</span>&#160;        fflush(0);</div>
+<div class="line"><a name="l01238"></a><span class="lineno"> 1238</span>&#160;</div>
+<div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n1; i++) {</div>
+<div class="line"><a name="l01240"></a><span class="lineno"> 1240</span>&#160;            a1[i] = ((((long)rand()) &lt;&lt; 31) ^ ((long)rand()));</div>
+<div class="line"><a name="l01241"></a><span class="lineno"> 1241</span>&#160;        }</div>
+<div class="line"><a name="l01242"></a><span class="lineno"> 1242</span>&#160;</div>
+<div class="line"><a name="l01243"></a><span class="lineno"> 1243</span>&#160;        <span class="keywordflow">if</span> (0) {</div>
+<div class="line"><a name="l01244"></a><span class="lineno"> 1244</span>&#160;            printf(<span class="stringliteral">&quot;Problem...\n&quot;</span>);</div>
+<div class="line"><a name="l01245"></a><span class="lineno"> 1245</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; 10; i++) {</div>
+<div class="line"><a name="l01246"></a><span class="lineno"> 1246</span>&#160;                printf(<span class="stringliteral">&quot;%ld\n&quot;</span>, a1[i]);</div>
+<div class="line"><a name="l01247"></a><span class="lineno"> 1247</span>&#160;            }</div>
+<div class="line"><a name="l01248"></a><span class="lineno"> 1248</span>&#160;            printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160;        }</div>
+<div class="line"><a name="l01250"></a><span class="lineno"> 1250</span>&#160;</div>
+<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting (threads=1)...\n&quot;</span>);}</div>
+<div class="line"><a name="l01252"></a><span class="lineno"> 1252</span>&#160;        fflush(0);</div>
 <div class="line"><a name="l01253"></a><span class="lineno"> 1253</span>&#160;</div>
-<div class="line"><a name="l01254"></a><span class="lineno"> 1254</span>&#160;        <span class="comment">//if (rank == 0) {printf(&quot;OK\n&quot;);}</span></div>
-<div class="line"><a name="l01255"></a><span class="lineno"> 1255</span>&#160;        <span class="comment">//fflush(0);</span></div>
-<div class="line"><a name="l01256"></a><span class="lineno"> 1256</span>&#160;    }</div>
-<div class="line"><a name="l01257"></a><span class="lineno"> 1257</span>&#160;</div>
-<div class="line"><a name="l01258"></a><span class="lineno"> 1258</span>&#160;    <span class="keywordflow">if</span> (1) {</div>
-<div class="line"><a name="l01259"></a><span class="lineno"> 1259</span>&#160;<span class="preprocessor">#ifdef _OPENMP</span></div>
-<div class="line"><a name="l01260"></a><span class="lineno"> 1260</span>&#160;        <span class="keywordtype">long</span> n5 = 100000000; <span class="comment">/*100M*/</span></div>
-<div class="line"><a name="l01261"></a><span class="lineno"> 1261</span>&#160;        <span class="keywordtype">long</span> *a5 = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">long</span>) * (<span class="keywordtype">size_t</span>)n5);</div>
-<div class="line"><a name="l01262"></a><span class="lineno"> 1262</span>&#160;        <span class="keywordflow">if</span> (a5 == 0) {</div>
-<div class="line"><a name="l01263"></a><span class="lineno"> 1263</span>&#160;            perror(<span class="stringliteral">&quot;malloc&quot;</span>);</div>
-<div class="line"><a name="l01264"></a><span class="lineno"> 1264</span>&#160;            MPI_Abort(MPI_COMM_WORLD, 1);</div>
-<div class="line"><a name="l01265"></a><span class="lineno"> 1265</span>&#160;        }</div>
-<div class="line"><a name="l01266"></a><span class="lineno"> 1266</span>&#160;</div>
-<div class="line"><a name="l01267"></a><span class="lineno"> 1267</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting data N=%zd\n&quot;</span>, n5);}</div>
-<div class="line"><a name="l01268"></a><span class="lineno"> 1268</span>&#160;</div>
-<div class="line"><a name="l01269"></a><span class="lineno"> 1269</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> threads = 1; threads &lt;= 8; threads *= 2) {</div>
-<div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160;            <span class="keywordflow">if</span> (setntheads) {</div>
-<div class="line"><a name="l01271"></a><span class="lineno"> 1271</span>&#160;                omp_set_num_threads(threads);</div>
-<div class="line"><a name="l01272"></a><span class="lineno"> 1272</span>&#160;            }</div>
-<div class="line"><a name="l01273"></a><span class="lineno"> 1273</span>&#160;</div>
-<div class="line"><a name="l01274"></a><span class="lineno"> 1274</span>&#160;            <span class="keywordtype">int</span> threadsused = 0;</div>
-<div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160;<span class="preprocessor">#pragma omp parallel</span></div>
-<div class="line"><a name="l01276"></a><span class="lineno"> 1276</span>&#160;            {</div>
-<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;                threadsused = omp_get_num_threads();</div>
-<div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160;            }</div>
-<div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160;</div>
-<div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Generating random numbers...\n&quot;</span>);}</div>
-<div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;            fflush(0);</div>
-<div class="line"><a name="l01282"></a><span class="lineno"> 1282</span>&#160;</div>
-<div class="line"><a name="l01283"></a><span class="lineno"> 1283</span>&#160;            srand(20140204);</div>
-<div class="line"><a name="l01284"></a><span class="lineno"> 1284</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n5; i++) {</div>
-<div class="line"><a name="l01285"></a><span class="lineno"> 1285</span>&#160;                a5[i] = ((((long)rand()) &lt;&lt; 31) ^ ((long)rand()));</div>
-<div class="line"><a name="l01286"></a><span class="lineno"> 1286</span>&#160;            }</div>
-<div class="line"><a name="l01287"></a><span class="lineno"> 1287</span>&#160;</div>
-<div class="line"><a name="l01288"></a><span class="lineno"> 1288</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting (threads=%d)...\n&quot;</span>, threadsused);}</div>
-<div class="line"><a name="l01289"></a><span class="lineno"> 1289</span>&#160;            fflush(0);</div>
-<div class="line"><a name="l01290"></a><span class="lineno"> 1290</span>&#160;</div>
-<div class="line"><a name="l01291"></a><span class="lineno"> 1291</span>&#160;            <span class="keywordtype">double</span> t0 = wtime();</div>
-<div class="line"><a name="l01292"></a><span class="lineno"> 1292</span>&#160;            <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(a5, (<span class="keywordtype">size_t</span>)n5, <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>), 5);</div>
-<div class="line"><a name="l01293"></a><span class="lineno"> 1293</span>&#160;            <span class="keywordtype">double</span> t1 = wtime();</div>
-<div class="line"><a name="l01294"></a><span class="lineno"> 1294</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;time=%f\n&quot;</span>, (t1 - t0));}</div>
-<div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;            fflush(0);</div>
+<div class="line"><a name="l01254"></a><span class="lineno"> 1254</span>&#160;        <span class="keywordtype">double</span> t0 = wtime();</div>
+<div class="line"><a name="l01255"></a><span class="lineno"> 1255</span>&#160;        <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(a1, (<span class="keywordtype">size_t</span>)n1, <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>), 0);</div>
+<div class="line"><a name="l01256"></a><span class="lineno"> 1256</span>&#160;        <span class="keywordtype">double</span> t1 = wtime();</div>
+<div class="line"><a name="l01257"></a><span class="lineno"> 1257</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;time=%f\n&quot;</span>, (t1 - t0));}</div>
+<div class="line"><a name="l01258"></a><span class="lineno"> 1258</span>&#160;        fflush(0);</div>
+<div class="line"><a name="l01259"></a><span class="lineno"> 1259</span>&#160;</div>
+<div class="line"><a name="l01260"></a><span class="lineno"> 1260</span>&#160;        <span class="keywordflow">if</span> (0) {</div>
+<div class="line"><a name="l01261"></a><span class="lineno"> 1261</span>&#160;            printf(<span class="stringliteral">&quot;Result...\n&quot;</span>);</div>
+<div class="line"><a name="l01262"></a><span class="lineno"> 1262</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; 10; i++) {</div>
+<div class="line"><a name="l01263"></a><span class="lineno"> 1263</span>&#160;                printf(<span class="stringliteral">&quot;%ld\n&quot;</span>, a1[i]);</div>
+<div class="line"><a name="l01264"></a><span class="lineno"> 1264</span>&#160;            }</div>
+<div class="line"><a name="l01265"></a><span class="lineno"> 1265</span>&#160;            printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l01266"></a><span class="lineno"> 1266</span>&#160;        }</div>
+<div class="line"><a name="l01267"></a><span class="lineno"> 1267</span>&#160;</div>
+<div class="line"><a name="l01268"></a><span class="lineno"> 1268</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Checking...\n&quot;</span>);}</div>
+<div class="line"><a name="l01269"></a><span class="lineno"> 1269</span>&#160;        <span class="keywordtype">long</span> lb = LONG_MIN;</div>
+<div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n1; i++) {</div>
+<div class="line"><a name="l01271"></a><span class="lineno"> 1271</span>&#160;            assert(a1[i] &gt;= lb);</div>
+<div class="line"><a name="l01272"></a><span class="lineno"> 1272</span>&#160;            <span class="keywordflow">if</span> (a1[i] &gt; lb) {</div>
+<div class="line"><a name="l01273"></a><span class="lineno"> 1273</span>&#160;                lb = a1[i];</div>
+<div class="line"><a name="l01274"></a><span class="lineno"> 1274</span>&#160;            }</div>
+<div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160;        }</div>
+<div class="line"><a name="l01276"></a><span class="lineno"> 1276</span>&#160;</div>
+<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;        <span class="comment">//if (rank == 0) {printf(&quot;OK\n&quot;);}</span></div>
+<div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160;        <span class="comment">//fflush(0);</span></div>
+<div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160;    }</div>
+<div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160;</div>
+<div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;    <span class="keywordflow">if</span> (1) {</div>
+<div class="line"><a name="l01282"></a><span class="lineno"> 1282</span>&#160;<span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a name="l01283"></a><span class="lineno"> 1283</span>&#160;        <span class="keywordtype">long</span> n5 = 100000000; <span class="comment">/*100M*/</span></div>
+<div class="line"><a name="l01284"></a><span class="lineno"> 1284</span>&#160;        <span class="keywordtype">long</span> *a5 = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">long</span>) * (<span class="keywordtype">size_t</span>)n5);</div>
+<div class="line"><a name="l01285"></a><span class="lineno"> 1285</span>&#160;        <span class="keywordflow">if</span> (a5 == 0) {</div>
+<div class="line"><a name="l01286"></a><span class="lineno"> 1286</span>&#160;            perror(<span class="stringliteral">&quot;malloc&quot;</span>);</div>
+<div class="line"><a name="l01287"></a><span class="lineno"> 1287</span>&#160;            MPI_Abort(MPI_COMM_WORLD, 1);</div>
+<div class="line"><a name="l01288"></a><span class="lineno"> 1288</span>&#160;        }</div>
+<div class="line"><a name="l01289"></a><span class="lineno"> 1289</span>&#160;</div>
+<div class="line"><a name="l01290"></a><span class="lineno"> 1290</span>&#160;        <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting data N=%zd\n&quot;</span>, n5);}</div>
+<div class="line"><a name="l01291"></a><span class="lineno"> 1291</span>&#160;</div>
+<div class="line"><a name="l01292"></a><span class="lineno"> 1292</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> threads = 1; threads &lt;= 8; threads *= 2) {</div>
+<div class="line"><a name="l01293"></a><span class="lineno"> 1293</span>&#160;            <span class="keywordflow">if</span> (setntheads) {</div>
+<div class="line"><a name="l01294"></a><span class="lineno"> 1294</span>&#160;                omp_set_num_threads(threads);</div>
+<div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;            }</div>
 <div class="line"><a name="l01296"></a><span class="lineno"> 1296</span>&#160;</div>
-<div class="line"><a name="l01297"></a><span class="lineno"> 1297</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Checking...\n&quot;</span>);}</div>
-<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160;            fflush(0);</div>
-<div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160;</div>
-<div class="line"><a name="l01300"></a><span class="lineno"> 1300</span>&#160;            <span class="keywordtype">long</span> lb5 = LONG_MIN;</div>
-<div class="line"><a name="l01301"></a><span class="lineno"> 1301</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n5; i++) {</div>
-<div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160;                assert(a5[i] &gt;= lb5);</div>
-<div class="line"><a name="l01303"></a><span class="lineno"> 1303</span>&#160;                <span class="keywordflow">if</span> (a5[i] &gt; lb5) {</div>
-<div class="line"><a name="l01304"></a><span class="lineno"> 1304</span>&#160;                    lb5 = a5[i];</div>
-<div class="line"><a name="l01305"></a><span class="lineno"> 1305</span>&#160;                }</div>
-<div class="line"><a name="l01306"></a><span class="lineno"> 1306</span>&#160;            }</div>
-<div class="line"><a name="l01307"></a><span class="lineno"> 1307</span>&#160;</div>
-<div class="line"><a name="l01308"></a><span class="lineno"> 1308</span>&#160;            <span class="comment">//if (rank == 0) {printf(&quot;OK\n&quot;);}</span></div>
-<div class="line"><a name="l01309"></a><span class="lineno"> 1309</span>&#160;            <span class="comment">//fflush(0);</span></div>
-<div class="line"><a name="l01310"></a><span class="lineno"> 1310</span>&#160;        }</div>
-<div class="line"><a name="l01311"></a><span class="lineno"> 1311</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l01312"></a><span class="lineno"> 1312</span>&#160;        printf(<span class="stringliteral">&quot;NOT OMP\n&quot;</span>);</div>
-<div class="line"><a name="l01313"></a><span class="lineno"> 1313</span>&#160;        fflush(0);</div>
-<div class="line"><a name="l01314"></a><span class="lineno"> 1314</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l01315"></a><span class="lineno"> 1315</span>&#160;    }</div>
-<div class="line"><a name="l01316"></a><span class="lineno"> 1316</span>&#160;}</div>
-<div class="line"><a name="l01317"></a><span class="lineno"> 1317</span>&#160;</div>
-<div class="line"><a name="l01318"></a><span class="lineno"> 1318</span>&#160;<span class="keywordtype">int</span></div>
-<div class="line"><a name="l01319"></a><span class="lineno"> 1319</span>&#160;main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
-<div class="line"><a name="l01320"></a><span class="lineno"> 1320</span>&#160;{</div>
-<div class="line"><a name="l01321"></a><span class="lineno"> 1321</span>&#160;    <span class="keywordtype">int</span> nprocs, rank, thlv;</div>
-<div class="line"><a name="l01322"></a><span class="lineno"> 1322</span>&#160;    <span class="comment">/*MPI_Init(&amp;argc, &amp;argv);*/</span></div>
-<div class="line"><a name="l01323"></a><span class="lineno"> 1323</span>&#160;    MPI_Init_thread(&amp;argc, &amp;argv, MPI_THREAD_SERIALIZED, &amp;thlv);</div>
-<div class="line"><a name="l01324"></a><span class="lineno"> 1324</span>&#160;    MPI_Comm_size(MPI_COMM_WORLD, &amp;nprocs);</div>
-<div class="line"><a name="l01325"></a><span class="lineno"> 1325</span>&#160;    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);</div>
-<div class="line"><a name="l01326"></a><span class="lineno"> 1326</span>&#160;</div>
-<div class="line"><a name="l01327"></a><span class="lineno"> 1327</span>&#160;    <a class="code" href="kmr_8h.html#a89dc005f93cbfdcdb0eebc302350a912">kmr_init</a>();</div>
-<div class="line"><a name="l01328"></a><span class="lineno"> 1328</span>&#160;</div>
-<div class="line"><a name="l01329"></a><span class="lineno"> 1329</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {</div>
-<div class="line"><a name="l01330"></a><span class="lineno"> 1330</span>&#160;<span class="preprocessor">#ifdef NDEBUG</span></div>
-<div class="line"><a name="l01331"></a><span class="lineno"> 1331</span>&#160;        _Bool assertion = 0;</div>
-<div class="line"><a name="l01332"></a><span class="lineno"> 1332</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l01333"></a><span class="lineno"> 1333</span>&#160;        _Bool assertion = 1;</div>
-<div class="line"><a name="l01334"></a><span class="lineno"> 1334</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l01335"></a><span class="lineno"> 1335</span>&#160;        <span class="keywordflow">if</span> (!assertion) {</div>
-<div class="line"><a name="l01336"></a><span class="lineno"> 1336</span>&#160;            kmr_error(0, <span class="stringliteral">&quot;Assertion disabled; recompile this test&quot;</span>);</div>
-<div class="line"><a name="l01337"></a><span class="lineno"> 1337</span>&#160;            <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l01338"></a><span class="lineno"> 1338</span>&#160;        }</div>
-<div class="line"><a name="l01339"></a><span class="lineno"> 1339</span>&#160;    }</div>
+<div class="line"><a name="l01297"></a><span class="lineno"> 1297</span>&#160;            <span class="keywordtype">int</span> threadsused = 0;</div>
+<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160;<span class="preprocessor">#pragma omp parallel</span></div>
+<div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160;            {</div>
+<div class="line"><a name="l01300"></a><span class="lineno"> 1300</span>&#160;                threadsused = omp_get_num_threads();</div>
+<div class="line"><a name="l01301"></a><span class="lineno"> 1301</span>&#160;            }</div>
+<div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160;</div>
+<div class="line"><a name="l01303"></a><span class="lineno"> 1303</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Generating random numbers...\n&quot;</span>);}</div>
+<div class="line"><a name="l01304"></a><span class="lineno"> 1304</span>&#160;            fflush(0);</div>
+<div class="line"><a name="l01305"></a><span class="lineno"> 1305</span>&#160;</div>
+<div class="line"><a name="l01306"></a><span class="lineno"> 1306</span>&#160;            srand(20140204);</div>
+<div class="line"><a name="l01307"></a><span class="lineno"> 1307</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n5; i++) {</div>
+<div class="line"><a name="l01308"></a><span class="lineno"> 1308</span>&#160;                a5[i] = ((((long)rand()) &lt;&lt; 31) ^ ((long)rand()));</div>
+<div class="line"><a name="l01309"></a><span class="lineno"> 1309</span>&#160;            }</div>
+<div class="line"><a name="l01310"></a><span class="lineno"> 1310</span>&#160;</div>
+<div class="line"><a name="l01311"></a><span class="lineno"> 1311</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Sorting (threads=%d)...\n&quot;</span>, threadsused);}</div>
+<div class="line"><a name="l01312"></a><span class="lineno"> 1312</span>&#160;            fflush(0);</div>
+<div class="line"><a name="l01313"></a><span class="lineno"> 1313</span>&#160;</div>
+<div class="line"><a name="l01314"></a><span class="lineno"> 1314</span>&#160;            <span class="keywordtype">double</span> t0 = wtime();</div>
+<div class="line"><a name="l01315"></a><span class="lineno"> 1315</span>&#160;            <a class="code" href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a>(a5, (<span class="keywordtype">size_t</span>)n5, <span class="keyword">sizeof</span>(<span class="keywordtype">long</span>), 5);</div>
+<div class="line"><a name="l01316"></a><span class="lineno"> 1316</span>&#160;            <span class="keywordtype">double</span> t1 = wtime();</div>
+<div class="line"><a name="l01317"></a><span class="lineno"> 1317</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;time=%f\n&quot;</span>, (t1 - t0));}</div>
+<div class="line"><a name="l01318"></a><span class="lineno"> 1318</span>&#160;            fflush(0);</div>
+<div class="line"><a name="l01319"></a><span class="lineno"> 1319</span>&#160;</div>
+<div class="line"><a name="l01320"></a><span class="lineno"> 1320</span>&#160;            <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;Checking...\n&quot;</span>);}</div>
+<div class="line"><a name="l01321"></a><span class="lineno"> 1321</span>&#160;            fflush(0);</div>
+<div class="line"><a name="l01322"></a><span class="lineno"> 1322</span>&#160;</div>
+<div class="line"><a name="l01323"></a><span class="lineno"> 1323</span>&#160;            <span class="keywordtype">long</span> lb5 = LONG_MIN;</div>
+<div class="line"><a name="l01324"></a><span class="lineno"> 1324</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">long</span> i = 0; i &lt; n5; i++) {</div>
+<div class="line"><a name="l01325"></a><span class="lineno"> 1325</span>&#160;                assert(a5[i] &gt;= lb5);</div>
+<div class="line"><a name="l01326"></a><span class="lineno"> 1326</span>&#160;                <span class="keywordflow">if</span> (a5[i] &gt; lb5) {</div>
+<div class="line"><a name="l01327"></a><span class="lineno"> 1327</span>&#160;                    lb5 = a5[i];</div>
+<div class="line"><a name="l01328"></a><span class="lineno"> 1328</span>&#160;                }</div>
+<div class="line"><a name="l01329"></a><span class="lineno"> 1329</span>&#160;            }</div>
+<div class="line"><a name="l01330"></a><span class="lineno"> 1330</span>&#160;</div>
+<div class="line"><a name="l01331"></a><span class="lineno"> 1331</span>&#160;            <span class="comment">//if (rank == 0) {printf(&quot;OK\n&quot;);}</span></div>
+<div class="line"><a name="l01332"></a><span class="lineno"> 1332</span>&#160;            <span class="comment">//fflush(0);</span></div>
+<div class="line"><a name="l01333"></a><span class="lineno"> 1333</span>&#160;        }</div>
+<div class="line"><a name="l01334"></a><span class="lineno"> 1334</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l01335"></a><span class="lineno"> 1335</span>&#160;        printf(<span class="stringliteral">&quot;NOT OMP\n&quot;</span>);</div>
+<div class="line"><a name="l01336"></a><span class="lineno"> 1336</span>&#160;        fflush(0);</div>
+<div class="line"><a name="l01337"></a><span class="lineno"> 1337</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l01338"></a><span class="lineno"> 1338</span>&#160;    }</div>
+<div class="line"><a name="l01339"></a><span class="lineno"> 1339</span>&#160;}</div>
 <div class="line"><a name="l01340"></a><span class="lineno"> 1340</span>&#160;</div>
-<div class="line"><a name="l01341"></a><span class="lineno"> 1341</span>&#160;    simple0(nprocs, rank, 0);</div>
-<div class="line"><a name="l01342"></a><span class="lineno"> 1342</span>&#160;    simple0(nprocs, rank, 1);</div>
-<div class="line"><a name="l01343"></a><span class="lineno"> 1343</span>&#160;    simple1(nprocs, rank);</div>
-<div class="line"><a name="l01344"></a><span class="lineno"> 1344</span>&#160;    simple2(nprocs, rank);</div>
-<div class="line"><a name="l01345"></a><span class="lineno"> 1345</span>&#160;    simple3(nprocs, rank);</div>
-<div class="line"><a name="l01346"></a><span class="lineno"> 1346</span>&#160;    simple4(nprocs, rank);</div>
-<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;    simple5(nprocs, rank);</div>
-<div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160;    simple6(nprocs, rank);</div>
-<div class="line"><a name="l01349"></a><span class="lineno"> 1349</span>&#160;    simple7(nprocs, rank);</div>
-<div class="line"><a name="l01350"></a><span class="lineno"> 1350</span>&#160;</div>
-<div class="line"><a name="l01351"></a><span class="lineno"> 1351</span>&#160;    MPI_Barrier(MPI_COMM_WORLD);</div>
-<div class="line"><a name="l01352"></a><span class="lineno"> 1352</span>&#160;    usleep(50 * 1000);</div>
-<div class="line"><a name="l01353"></a><span class="lineno"> 1353</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;OK\n&quot;</span>);}</div>
-<div class="line"><a name="l01354"></a><span class="lineno"> 1354</span>&#160;    fflush(0);</div>
-<div class="line"><a name="l01355"></a><span class="lineno"> 1355</span>&#160;</div>
-<div class="line"><a name="l01356"></a><span class="lineno"> 1356</span>&#160;    <a class="code" href="kmr_8h.html#a617746ae8bd9b8bd6f8af9b4ca6e1733">kmr_fin</a>();</div>
-<div class="line"><a name="l01357"></a><span class="lineno"> 1357</span>&#160;</div>
-<div class="line"><a name="l01358"></a><span class="lineno"> 1358</span>&#160;    MPI_Finalize();</div>
-<div class="line"><a name="l01359"></a><span class="lineno"> 1359</span>&#160;</div>
-<div class="line"><a name="l01360"></a><span class="lineno"> 1360</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l01361"></a><span class="lineno"> 1361</span>&#160;}</div>
+<div class="line"><a name="l01341"></a><span class="lineno"> 1341</span>&#160;<span class="keywordtype">int</span></div>
+<div class="line"><a name="l01342"></a><span class="lineno"> 1342</span>&#160;main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><a name="l01343"></a><span class="lineno"> 1343</span>&#160;{</div>
+<div class="line"><a name="l01344"></a><span class="lineno"> 1344</span>&#160;    <span class="keywordtype">int</span> nprocs, rank, thlv;</div>
+<div class="line"><a name="l01345"></a><span class="lineno"> 1345</span>&#160;    <span class="comment">/*MPI_Init(&amp;argc, &amp;argv);*/</span></div>
+<div class="line"><a name="l01346"></a><span class="lineno"> 1346</span>&#160;    MPI_Init_thread(&amp;argc, &amp;argv, MPI_THREAD_SERIALIZED, &amp;thlv);</div>
+<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;    MPI_Comm_size(MPI_COMM_WORLD, &amp;nprocs);</div>
+<div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160;    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);</div>
+<div class="line"><a name="l01349"></a><span class="lineno"> 1349</span>&#160;</div>
+<div class="line"><a name="l01350"></a><span class="lineno"> 1350</span>&#160;    <a class="code" href="kmr_8h.html#a89dc005f93cbfdcdb0eebc302350a912">kmr_init</a>();</div>
+<div class="line"><a name="l01351"></a><span class="lineno"> 1351</span>&#160;</div>
+<div class="line"><a name="l01352"></a><span class="lineno"> 1352</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {</div>
+<div class="line"><a name="l01353"></a><span class="lineno"> 1353</span>&#160;<span class="preprocessor">#ifdef NDEBUG</span></div>
+<div class="line"><a name="l01354"></a><span class="lineno"> 1354</span>&#160;        _Bool assertion = 0;</div>
+<div class="line"><a name="l01355"></a><span class="lineno"> 1355</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l01356"></a><span class="lineno"> 1356</span>&#160;        _Bool assertion = 1;</div>
+<div class="line"><a name="l01357"></a><span class="lineno"> 1357</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l01358"></a><span class="lineno"> 1358</span>&#160;        <span class="keywordflow">if</span> (!assertion) {</div>
+<div class="line"><a name="l01359"></a><span class="lineno"> 1359</span>&#160;            kmr_error(0, <span class="stringliteral">&quot;Assertion disabled; recompile this test&quot;</span>);</div>
+<div class="line"><a name="l01360"></a><span class="lineno"> 1360</span>&#160;            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l01361"></a><span class="lineno"> 1361</span>&#160;        }</div>
+<div class="line"><a name="l01362"></a><span class="lineno"> 1362</span>&#160;    }</div>
+<div class="line"><a name="l01363"></a><span class="lineno"> 1363</span>&#160;</div>
+<div class="line"><a name="l01364"></a><span class="lineno"> 1364</span>&#160;    simple0(nprocs, rank, 0);</div>
+<div class="line"><a name="l01365"></a><span class="lineno"> 1365</span>&#160;    simple0(nprocs, rank, 1);</div>
+<div class="line"><a name="l01366"></a><span class="lineno"> 1366</span>&#160;    simple1(nprocs, rank);</div>
+<div class="line"><a name="l01367"></a><span class="lineno"> 1367</span>&#160;    simple2(nprocs, rank);</div>
+<div class="line"><a name="l01368"></a><span class="lineno"> 1368</span>&#160;    simple3(nprocs, rank);</div>
+<div class="line"><a name="l01369"></a><span class="lineno"> 1369</span>&#160;    simple4(nprocs, rank);</div>
+<div class="line"><a name="l01370"></a><span class="lineno"> 1370</span>&#160;    simple5(nprocs, rank);</div>
+<div class="line"><a name="l01371"></a><span class="lineno"> 1371</span>&#160;    simple6(nprocs, rank);</div>
+<div class="line"><a name="l01372"></a><span class="lineno"> 1372</span>&#160;    simple7(nprocs, rank);</div>
+<div class="line"><a name="l01373"></a><span class="lineno"> 1373</span>&#160;</div>
+<div class="line"><a name="l01374"></a><span class="lineno"> 1374</span>&#160;    MPI_Barrier(MPI_COMM_WORLD);</div>
+<div class="line"><a name="l01375"></a><span class="lineno"> 1375</span>&#160;    usleep(50 * 1000);</div>
+<div class="line"><a name="l01376"></a><span class="lineno"> 1376</span>&#160;    <span class="keywordflow">if</span> (rank == 0) {printf(<span class="stringliteral">&quot;OK\n&quot;</span>);}</div>
+<div class="line"><a name="l01377"></a><span class="lineno"> 1377</span>&#160;    fflush(0);</div>
+<div class="line"><a name="l01378"></a><span class="lineno"> 1378</span>&#160;</div>
+<div class="line"><a name="l01379"></a><span class="lineno"> 1379</span>&#160;    <a class="code" href="kmr_8h.html#a617746ae8bd9b8bd6f8af9b4ca6e1733">kmr_fin</a>();</div>
+<div class="line"><a name="l01380"></a><span class="lineno"> 1380</span>&#160;</div>
+<div class="line"><a name="l01381"></a><span class="lineno"> 1381</span>&#160;    MPI_Finalize();</div>
+<div class="line"><a name="l01382"></a><span class="lineno"> 1382</span>&#160;</div>
+<div class="line"><a name="l01383"></a><span class="lineno"> 1383</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l01384"></a><span class="lineno"> 1384</span>&#160;}</div>
 <div class="ttc" id="unionkmr__kvs_html"><div class="ttname"><a href="unionkmr__kvs.html">kmr_kvs</a></div><div class="ttdoc">Key-Value Stream (abstract). </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00577">kmr.h:577</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html"><div class="ttname"><a href="kmrimpl_8h.html">kmrimpl.h</a></div><div class="ttdoc">Utilities Private Part (do not include from applications). </div></div>
-<div class="ttc" id="kmr_8h_html_ada07fb9d17822e3720c64976e3bc7fdd"><div class="ttname"><a href="kmr_8h.html#ada07fb9d17822e3720c64976e3bc7fdd">kmr_map_for_some</a></div><div class="ttdeci">int kmr_map_for_some(KMR_KVS *kvi, KMR_KVS *kvo, void *arg, struct kmr_option opt, kmr_mapfn_t m)</div><div class="ttdoc">Maps until some key-value are added. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00912">kmrmoreops.c:912</a></div></div>
+<div class="ttc" id="kmr_8h_html_ada07fb9d17822e3720c64976e3bc7fdd"><div class="ttname"><a href="kmr_8h.html#ada07fb9d17822e3720c64976e3bc7fdd">kmr_map_for_some</a></div><div class="ttdeci">int kmr_map_for_some(KMR_KVS *kvi, KMR_KVS *kvo, void *arg, struct kmr_option opt, kmr_mapfn_t m)</div><div class="ttdoc">Maps until some key-value are added. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00913">kmrmoreops.c:913</a></div></div>
 <div class="ttc" id="kmr_8h_html_ae06cb9083e42011c9fa019add7bc228f"><div class="ttname"><a href="kmr_8h.html#ae06cb9083e42011c9fa019add7bc228f">kmr_reduce</a></div><div class="ttdeci">#define kmr_reduce(KVI, KVO, ARG, OPT, R)</div><div class="ttdoc">Reduces key-value pairs. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00085">kmr.h:85</a></div></div>
 <div class="ttc" id="structkmr__option_html"><div class="ttname"><a href="structkmr__option.html">kmr_option</a></div><div class="ttdoc">Options to Mapping, Shuffling, and Reduction. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00603">kmr.h:603</a></div></div>
 <div class="ttc" id="kmr_8h_html_af45076291f415e5137cecf882e77bcaa"><div class="ttname"><a href="kmr_8h.html#af45076291f415e5137cecf882e77bcaa">kmr_add_kv</a></div><div class="ttdeci">int kmr_add_kv(KMR_KVS *kvs, const struct kmr_kv_box kv)</div><div class="ttdoc">Adds a key-value pair. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00742">kmrbase.c:742</a></div></div>
 <div class="ttc" id="kmr_8h_html_a486929819eaa18ce566911c8a2c17dd9"><div class="ttname"><a href="kmr_8h.html#a486929819eaa18ce566911c8a2c17dd9">kmr_create_pushoff_kvs</a></div><div class="ttdeci">KMR_KVS * kmr_create_pushoff_kvs(KMR *mr, enum kmr_kv_field kf, enum kmr_kv_field vf, struct kmr_option opt, const char *, const int, const char *)</div><div class="ttdoc">Makes a new key-value stream with the specified field data-types. </div><div class="ttdef"><b>Definition:</b> <a href="kmraltkvs_8c_source.html#l00085">kmraltkvs.c:85</a></div></div>
-<div class="ttc" id="kmrbase_8c_html_ab1523c75d1b330e948a7a322257eb6c2"><div class="ttname"><a href="kmrbase_8c.html#ab1523c75d1b330e948a7a322257eb6c2">kmr_icmp</a></div><div class="ttdeci">static int kmr_icmp(const void *a0, const void *a1)</div><div class="ttdoc">Compares the key field of keyed-records for qsort/bsearch. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01781">kmrbase.c:1781</a></div></div>
-<div class="ttc" id="kmr_8h_html_a815a3eafd8bde396d34bbf5f39ba9783"><div class="ttname"><a href="kmr_8h.html#a815a3eafd8bde396d34bbf5f39ba9783">kmr_map_once</a></div><div class="ttdeci">int kmr_map_once(KMR_KVS *kvo, void *arg, struct kmr_option opt, _Bool rank_zero_only, kmr_mapfn_t m)</div><div class="ttdoc">Maps once. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01376">kmrbase.c:1376</a></div></div>
+<div class="ttc" id="kmrbase_8c_html_ab1523c75d1b330e948a7a322257eb6c2"><div class="ttname"><a href="kmrbase_8c.html#ab1523c75d1b330e948a7a322257eb6c2">kmr_icmp</a></div><div class="ttdeci">static int kmr_icmp(const void *a0, const void *a1)</div><div class="ttdoc">Compares the key field of keyed-records for qsort/bsearch. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01784">kmrbase.c:1784</a></div></div>
+<div class="ttc" id="kmr_8h_html_a815a3eafd8bde396d34bbf5f39ba9783"><div class="ttname"><a href="kmr_8h.html#a815a3eafd8bde396d34bbf5f39ba9783">kmr_map_once</a></div><div class="ttdeci">int kmr_map_once(KMR_KVS *kvo, void *arg, struct kmr_option opt, _Bool rank_zero_only, kmr_mapfn_t m)</div><div class="ttdoc">Maps once. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01379">kmrbase.c:1379</a></div></div>
 <div class="ttc" id="kmr_8h_html_a5c5006dd70e399d546c5345142f72f6d"><div class="ttname"><a href="kmr_8h.html#a5c5006dd70e399d546c5345142f72f6d">kmr_create_kvs</a></div><div class="ttdeci">#define kmr_create_kvs(MR, KF, VF)</div><div class="ttdoc">Makes a new key-value stream (of type KMR_KVS) with the specified field datatypes. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00068">kmr.h:68</a></div></div>
 <div class="ttc" id="kmr_8h_html_ab676a31f6cfd76b38ad5f86b4a09f81d"><div class="ttname"><a href="kmr_8h.html#ab676a31f6cfd76b38ad5f86b4a09f81d">kmr_save_kvs</a></div><div class="ttdeci">int kmr_save_kvs(KMR_KVS *kvi, void **dataq, size_t *szq, struct kmr_option opt)</div><div class="ttdoc">Packs locally the contents of a key-value stream to a byte array. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00959">kmrbase.c:959</a></div></div>
-<div class="ttc" id="kmr_8h_html_a194686701b3c46a869fe9eb2cab93252"><div class="ttname"><a href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a></div><div class="ttdeci">int kmr_shuffle(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Shuffles key-value pairs to the appropriate destination ranks. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01992">kmrbase.c:1992</a></div></div>
-<div class="ttc" id="kmr_8h_html_a058890c9ef6689deacfd9eda9d25e513"><div class="ttname"><a href="kmr_8h.html#a058890c9ef6689deacfd9eda9d25e513">kmr_distribute</a></div><div class="ttdeci">int kmr_distribute(KMR_KVS *kvi, KMR_KVS *kvo, _Bool cyclic, struct kmr_option opt)</div><div class="ttdoc">Distributes key-value pairs approximately evenly to ranks. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00834">kmrmoreops.c:834</a></div></div>
+<div class="ttc" id="kmr_8h_html_a194686701b3c46a869fe9eb2cab93252"><div class="ttname"><a href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252">kmr_shuffle</a></div><div class="ttdeci">int kmr_shuffle(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Shuffles key-value pairs to the appropriate destination ranks. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01995">kmrbase.c:1995</a></div></div>
+<div class="ttc" id="kmr_8h_html_a058890c9ef6689deacfd9eda9d25e513"><div class="ttname"><a href="kmr_8h.html#a058890c9ef6689deacfd9eda9d25e513">kmr_distribute</a></div><div class="ttdeci">int kmr_distribute(KMR_KVS *kvi, KMR_KVS *kvo, _Bool cyclic, struct kmr_option opt)</div><div class="ttdoc">Distributes key-value pairs approximately evenly to ranks. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00835">kmrmoreops.c:835</a></div></div>
 <div class="ttc" id="kmr_8h_html_ac07e8d3c6b4a229295ed3f9d982d1a04"><div class="ttname"><a href="kmr_8h.html#ac07e8d3c6b4a229295ed3f9d982d1a04">kmr_add_kv_done</a></div><div class="ttdeci">int kmr_add_kv_done(KMR_KVS *kvs)</div><div class="ttdoc">Marks finished adding key-value pairs. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00872">kmrbase.c:872</a></div></div>
-<div class="ttc" id="kmr_8h_html_a6ab020cce7e7f28f0937fc71a03bc759"><div class="ttname"><a href="kmr_8h.html#a6ab020cce7e7f28f0937fc71a03bc759">kmr_sort_by_one</a></div><div class="ttdeci">int kmr_sort_by_one(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sort by rank0, a degenerated case for small number of keys. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00543">kmrmoreops.c:543</a></div></div>
+<div class="ttc" id="kmr_8h_html_a6ab020cce7e7f28f0937fc71a03bc759"><div class="ttname"><a href="kmr_8h.html#a6ab020cce7e7f28f0937fc71a03bc759">kmr_sort_by_one</a></div><div class="ttdeci">int kmr_sort_by_one(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sort by rank0, a degenerated case for small number of keys. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00544">kmrmoreops.c:544</a></div></div>
 <div class="ttc" id="structkmr__ctx_html"><div class="ttname"><a href="structkmr__ctx.html">kmr_ctx</a></div><div class="ttdoc">KMR Context. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00217">kmr.h:217</a></div></div>
-<div class="ttc" id="kmr_8h_html_a273d7bee0df5928f5700b3c6bbb31939"><div class="ttname"><a href="kmr_8h.html#a273d7bee0df5928f5700b3c6bbb31939">kmr_concatenate_kvs</a></div><div class="ttdeci">int kmr_concatenate_kvs(KMR_KVS *kvs[], int nkvs, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Concatenates a number of KVSes to one. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l02618">kmrbase.c:2618</a></div></div>
+<div class="ttc" id="kmr_8h_html_a273d7bee0df5928f5700b3c6bbb31939"><div class="ttname"><a href="kmr_8h.html#a273d7bee0df5928f5700b3c6bbb31939">kmr_concatenate_kvs</a></div><div class="ttdeci">int kmr_concatenate_kvs(KMR_KVS *kvs[], int nkvs, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Concatenates a number of KVSes to one. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l02621">kmrbase.c:2621</a></div></div>
 <div class="ttc" id="kmr_8h_html_a642656490e91b16d31f4253e35d8e03c"><div class="ttname"><a href="kmr_8h.html#a642656490e91b16d31f4253e35d8e03c">kmr_free_kvs</a></div><div class="ttdeci">int kmr_free_kvs(KMR_KVS *kvs)</div><div class="ttdoc">Releases a key-value stream (type KMR_KVS). </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00612">kmrbase.c:612</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_ad3da37619850f67abc2d7a79883967cb"><div class="ttname"><a href="kmrimpl_8h.html#ad3da37619850f67abc2d7a79883967cb">kmr_isort</a></div><div class="ttdeci">void kmr_isort(void *a, size_t n, size_t es, int depth)</div><div class="ttdoc">Sorts by comparator on long integers. </div><div class="ttdef"><b>Definition:</b> <a href="kmrisort_8c_source.html#l00292">kmrisort.c:292</a></div></div>
+<div class="ttc" id="kmr_8h_html_a89cc00c0639b9d904e1aca7035c30f47"><div class="ttname"><a href="kmr_8h.html#a89cc00c0639b9d904e1aca7035c30f47">kmr_take_one</a></div><div class="ttdeci">int kmr_take_one(KMR_KVS *kvi, struct kmr_kv_box *kv)</div><div class="ttdoc">Extracts a single key-value pair locally in the key-value stream KVI. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01346">kmrbase.c:1346</a></div></div>
 <div class="ttc" id="kmr_8h_html_a7bb545fb804c554dfc05baab4c8abf8d"><div class="ttname"><a href="kmr_8h.html#a7bb545fb804c554dfc05baab4c8abf8d">kmr_map</a></div><div class="ttdeci">#define kmr_map(KVI, KVO, ARG, OPT, M)</div><div class="ttdoc">Maps simply. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00079">kmr.h:79</a></div></div>
 <div class="ttc" id="structkmr__kv__box_html"><div class="ttname"><a href="structkmr__kv__box.html">kmr_kv_box</a></div><div class="ttdoc">Handy Copy of a Key-Value Field. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00348">kmr.h:348</a></div></div>
-<div class="ttc" id="kmr_8h_html_a2ee642a4f300cc31d6e86cdc6064d177"><div class="ttname"><a href="kmr_8h.html#a2ee642a4f300cc31d6e86cdc6064d177">kmr_sort_large</a></div><div class="ttdeci">int kmr_sort_large(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sorts a key-value stream by the regular or the random sampling-sort. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00468">kmrmoreops.c:468</a></div></div>
+<div class="ttc" id="kmr_8h_html_a2ee642a4f300cc31d6e86cdc6064d177"><div class="ttname"><a href="kmr_8h.html#a2ee642a4f300cc31d6e86cdc6064d177">kmr_sort_large</a></div><div class="ttdeci">int kmr_sort_large(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sorts a key-value stream by the regular or the random sampling-sort. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00469">kmrmoreops.c:469</a></div></div>
 <div class="ttc" id="kmr_8h_html_a617746ae8bd9b8bd6f8af9b4ca6e1733"><div class="ttname"><a href="kmr_8h.html#a617746ae8bd9b8bd6f8af9b4ca6e1733">kmr_fin</a></div><div class="ttdeci">int kmr_fin(void)</div><div class="ttdoc">Clears the environment. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00123">kmrbase.c:123</a></div></div>
-<div class="ttc" id="kmr_8h_html_a161eaf42b3fb2855b6186ccf41fc72ab"><div class="ttname"><a href="kmr_8h.html#a161eaf42b3fb2855b6186ccf41fc72ab">kmr_get_element_count</a></div><div class="ttdeci">int kmr_get_element_count(KMR_KVS *kvs, long *v)</div><div class="ttdoc">Gets the total number of key-value pairs. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00113">kmrmoreops.c:113</a></div></div>
+<div class="ttc" id="kmr_8h_html_a161eaf42b3fb2855b6186ccf41fc72ab"><div class="ttname"><a href="kmr_8h.html#a161eaf42b3fb2855b6186ccf41fc72ab">kmr_get_element_count</a></div><div class="ttdeci">int kmr_get_element_count(KMR_KVS *kvs, long *v)</div><div class="ttdoc">Gets the total number of key-value pairs. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00114">kmrmoreops.c:114</a></div></div>
 <div class="ttc" id="kmr_8h_html_a89dc005f93cbfdcdb0eebc302350a912"><div class="ttname"><a href="kmr_8h.html#a89dc005f93cbfdcdb0eebc302350a912">kmr_init</a></div><div class="ttdeci">#define kmr_init()</div><div class="ttdoc">Sets up the environment. </div><div class="ttdef"><b>Definition:</b> <a href="kmr_8h_source.html#l00737">kmr.h:737</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_ab5b9abe31aea78db3f73b2b5efbbb512"><div class="ttname"><a href="kmrimpl_8h.html#ab5b9abe31aea78db3f73b2b5efbbb512">kmr_bsearch</a></div><div class="ttdeci">void * kmr_bsearch(const void *key, const void *base, size_t nel, size_t size, int(*compar)(const void *, const void *))</div><div class="ttdoc">Searches a key entry like bsearch(3C), but returns a next greater entry instead of null on no match...</div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l00565">kmrutil.c:565</a></div></div>
-<div class="ttc" id="kmr_8h_html_a43dc49274f766b46b16ec77b0217c6ca"><div class="ttname"><a href="kmr_8h.html#a43dc49274f766b46b16ec77b0217c6ca">kmr_sort</a></div><div class="ttdeci">int kmr_sort(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sorts a key-value stream globally. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00574">kmrmoreops.c:574</a></div></div>
+<div class="ttc" id="kmr_8h_html_a43dc49274f766b46b16ec77b0217c6ca"><div class="ttname"><a href="kmr_8h.html#a43dc49274f766b46b16ec77b0217c6ca">kmr_sort</a></div><div class="ttdeci">int kmr_sort(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sorts a key-value stream globally. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00575">kmrmoreops.c:575</a></div></div>
 <div class="ttc" id="kmrimpl_8h_html_a99aba6b2646db141ef66b7741d90cc52"><div class="ttname"><a href="kmrimpl_8h.html#a99aba6b2646db141ef66b7741d90cc52">kmr_assert_sorted</a></div><div class="ttdeci">int kmr_assert_sorted(KMR_KVS *kvi, _Bool locally, _Bool shuffling, _Bool ranking)</div><div class="ttdoc">Checks a key-value stream is sorted. </div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l00702">kmrutil.c:702</a></div></div>
 <div class="ttc" id="kmr_8h_html_aebc6c6968706bc28d58ad00391125754"><div class="ttname"><a href="kmr_8h.html#aebc6c6968706bc28d58ad00391125754">kmr_restore_kvs</a></div><div class="ttdeci">int kmr_restore_kvs(KMR_KVS *kvo, void *data, size_t sz, struct kmr_option opt)</div><div class="ttdoc">Unpacks locally the contents of a key-value stream from a byte array. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01025">kmrbase.c:1025</a></div></div>
 <div class="ttc" id="kmr_8h_html_ad7d12efd914c8b60a54eb82b7a930ea7"><div class="ttname"><a href="kmr_8h.html#ad7d12efd914c8b60a54eb82b7a930ea7">kmr_free_context</a></div><div class="ttdeci">int kmr_free_context(KMR *mr)</div><div class="ttdoc">Releases a context created with kmr_create_context(). </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00316">kmrbase.c:316</a></div></div>
 <div class="ttc" id="kmr_8h_html"><div class="ttname"><a href="kmr_8h.html">kmr.h</a></div><div class="ttdoc">KMR Interface. </div></div>
 <div class="ttc" id="kmrimpl_8h_html_accb6410f2d154927d3b5afd29d5c2fdc"><div class="ttname"><a href="kmrimpl_8h.html#accb6410f2d154927d3b5afd29d5c2fdc">kmr_load_properties</a></div><div class="ttdeci">int kmr_load_properties(MPI_Info conf, char *filename)</div><div class="ttdoc">Loads properties into MPI_Info (in Latin1 characters). </div><div class="ttdef"><b>Definition:</b> <a href="kmrutil_8c_source.html#l01844">kmrutil.c:1844</a></div></div>
-<div class="ttc" id="kmr_8h_html_a64d9a689d79d64bcfa10d61c1d335ee7"><div class="ttname"><a href="kmr_8h.html#a64d9a689d79d64bcfa10d61c1d335ee7">kmr_replicate</a></div><div class="ttdeci">int kmr_replicate(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gat...</div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l02127">kmrbase.c:2127</a></div></div>
-<div class="ttc" id="kmr_8h_html_a1f4206dfa415bd8d42e836a4fbf0838f"><div class="ttname"><a href="kmr_8h.html#a1f4206dfa415bd8d42e836a4fbf0838f">kmr_sort_small</a></div><div class="ttdeci">int kmr_sort_small(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sorts a key-value stream, by partitioning to equal ranges. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00387">kmrmoreops.c:387</a></div></div>
-<div class="ttc" id="kmr_8h_html_a44b1acc032c1e378030ce36ed4ee68f9"><div class="ttname"><a href="kmr_8h.html#a44b1acc032c1e378030ce36ed4ee68f9">kmr_sort_locally</a></div><div class="ttdeci">int kmr_sort_locally(KMR_KVS *kvi, KMR_KVS *kvo, _Bool shuffling, struct kmr_option opt)</div><div class="ttdoc">Reorders key-value pairs in a single rank. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01949">kmrbase.c:1949</a></div></div>
-<div class="ttc" id="kmr_8h_html_ab58641ce4b8c06e61f3e21606b7fed36"><div class="ttname"><a href="kmr_8h.html#ab58641ce4b8c06e61f3e21606b7fed36">kmr_map_on_rank_zero</a></div><div class="ttdeci">int kmr_map_on_rank_zero(KMR_KVS *kvo, void *arg, struct kmr_option opt, kmr_mapfn_t m)</div><div class="ttdoc">Maps on rank0 only. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01422">kmrbase.c:1422</a></div></div>
+<div class="ttc" id="kmr_8h_html_a64d9a689d79d64bcfa10d61c1d335ee7"><div class="ttname"><a href="kmr_8h.html#a64d9a689d79d64bcfa10d61c1d335ee7">kmr_replicate</a></div><div class="ttdeci">int kmr_replicate(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Replicates key-value pairs to be visible on all ranks, that is, it has the effect of bcast or all-gat...</div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l02130">kmrbase.c:2130</a></div></div>
+<div class="ttc" id="kmr_8h_html_a1f4206dfa415bd8d42e836a4fbf0838f"><div class="ttname"><a href="kmr_8h.html#a1f4206dfa415bd8d42e836a4fbf0838f">kmr_sort_small</a></div><div class="ttdeci">int kmr_sort_small(KMR_KVS *kvi, KMR_KVS *kvo, struct kmr_option opt)</div><div class="ttdoc">Sorts a key-value stream, by partitioning to equal ranges. </div><div class="ttdef"><b>Definition:</b> <a href="kmrmoreops_8c_source.html#l00388">kmrmoreops.c:388</a></div></div>
+<div class="ttc" id="kmr_8h_html_a44b1acc032c1e378030ce36ed4ee68f9"><div class="ttname"><a href="kmr_8h.html#a44b1acc032c1e378030ce36ed4ee68f9">kmr_sort_locally</a></div><div class="ttdeci">int kmr_sort_locally(KMR_KVS *kvi, KMR_KVS *kvo, _Bool shuffling, struct kmr_option opt)</div><div class="ttdoc">Reorders key-value pairs in a single rank. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01952">kmrbase.c:1952</a></div></div>
+<div class="ttc" id="kmr_8h_html_ab58641ce4b8c06e61f3e21606b7fed36"><div class="ttname"><a href="kmr_8h.html#ab58641ce4b8c06e61f3e21606b7fed36">kmr_map_on_rank_zero</a></div><div class="ttdeci">int kmr_map_on_rank_zero(KMR_KVS *kvo, void *arg, struct kmr_option opt, kmr_mapfn_t m)</div><div class="ttdoc">Maps on rank0 only. </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l01425">kmrbase.c:1425</a></div></div>
 <div class="ttc" id="kmr_8h_html_a41b105ad6655dbba1b821179bad3fdd4"><div class="ttname"><a href="kmr_8h.html#a41b105ad6655dbba1b821179bad3fdd4">kmr_create_context</a></div><div class="ttdeci">KMR * kmr_create_context(const MPI_Comm comm, const MPI_Info conf, const char *name)</div><div class="ttdoc">Makes a new KMR context (a context has type KMR). </div><div class="ttdef"><b>Definition:</b> <a href="kmrbase_8c_source.html#l00146">kmrbase.c:146</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 22 2015 18:25:25 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 29 2015 13:40:46 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

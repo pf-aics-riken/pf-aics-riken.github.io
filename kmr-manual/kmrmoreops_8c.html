@@ -301,9 +301,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 </div><div class="memdoc">
 
 <p>Finds a key-value pair for a key. </p>
-<p>It is an error when not exactly one entry is found. It does not consume the input KVS KVI. It maps internally, so it is slow. It is tricky that the internally created KVS KVS0 points to the key-value area in the input KVS KVI. </p>
+<p>It is an error when not exactly one entry is found. It does not consume the input KVS KVI. The returned key-value entry must be used before freeing the input KVS, when it points to an opaque data. It maps internally, so it is slow. It is tricky that the internally created KVS KVS0 points to the key-value area in the input KVS KVI. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00042">42</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00043">43</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -340,7 +340,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Finds the key K in the key-value stream KVS. </p>
 <p>It returns a pointer pointing inside the key-value stream. It is an error when not exactly one entry is found. It does not consume the input KVS. It maps internally, so slow. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00072">72</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00073">73</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -371,7 +371,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Gets the total number of key-value pairs. </p>
 <p>It uses replication and reduction. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00113">113</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00114">114</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -408,7 +408,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Makes a new pair by swapping the key and the value in each pair. </p>
 <p>That is, it makes new pairs (v0,k0) from (k0,v0). This is a simple mapper. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00158">158</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00159">159</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -445,7 +445,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Replaces a value part with a key-value pairing. </p>
 <p>That is, it makes new pairs (k0,(k0,v0)) from (k0,v0). See <a class="el" href="kmrmoreops_8c.html#a5ef882f82ea273da7b31a2de5c922d57" title="Extracts a key-value pair from a pairing in the value part, discarding the original key...">kmr_unpairing()</a>. This is a simple mapper. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00211">211</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00212">212</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -482,7 +482,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Extracts a key-value pair from a pairing in the value part, discarding the original key. </p>
 <p>It is the inverse of kmr_pairing. That is, it makes new pairs (k1,v1) from (k0,(k1,v1)). See <a class="el" href="kmrmoreops_8c.html#aea1ec5745abce4c3b711146b0d4f5ce6" title="Replaces a value part with a key-value pairing. ">kmr_pairing()</a>. This is a simple mapper. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN, TAKE_CKPT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00233">233</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00234">234</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -519,7 +519,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Sorts a key-value stream, by partitioning to equal ranges. </p>
 <p>It is NOT-STABLE due to quick-sort used inside. It consumes an input key-value stream unless INSPECT is specified. It assumes uniform distribution, and partioning is simply determined by the range of keys (MIN-MAX range is divided by nprocs). Effective-options: NOTHREADING, INSPECT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00387">387</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00388">388</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -556,7 +556,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Sorts a key-value stream by the regular or the random sampling-sort. </p>
 <p>It is NOT-STABLE due to quick-sort used inside. It consumes an input key-value stream unless INSPECT is specified. It can be used for "GraySort". Effective-options: NOTHREADING, INSPECT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00468">468</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00469">469</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -593,7 +593,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Sort by rank0, a degenerated case for small number of keys. </p>
 <p>It is NOT-STABLE due to quick-sort used inside. It consumes an input key-value stream unless INSPECT is specified. Effective-options: INSPECT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00543">543</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00544">544</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -630,7 +630,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Sorts a key-value stream globally. </p>
 <p>It is NOT-STABLE due to quick-sort used inside. It consumes an input key-value stream unless INSPECT is specified. It selects a sorting routine on the total number of keys. See <a class="el" href="kmrmoreops_8c.html#a2ee642a4f300cc31d6e86cdc6064d177" title="Sorts a key-value stream by the regular or the random sampling-sort. ">kmr_sort_large()</a>, <a class="el" href="kmrmoreops_8c.html#a1f4206dfa415bd8d42e836a4fbf0838f" title="Sorts a key-value stream, by partitioning to equal ranges. ">kmr_sort_small()</a>, or <a class="el" href="kmrmoreops_8c.html#a6ab020cce7e7f28f0937fc71a03bc759" title="Sort by rank0, a degenerated case for small number of keys. ">kmr_sort_by_one()</a>. The results are stored as ascending ranks, thus the rank0 holds the minimum. Effective-options: INSPECT. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00574">574</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00575">575</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -673,7 +673,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Makes key-value pairs as products of the two values in two key-value stream. </p>
 <p>It creates a set of key-value pairs (ai,bj) of the pairs (key,ai) from KVS0 and (key,bj) from KVS1 for the matching key. It makes a direct-product of the values when multiple values exist for a matching key. That is, for example, given a set {(k,a0), (k,a1), (k,a2)} in KVS0 and {(k,b3), (k,b4)} in KVS1 for some distinct key, it creates {(a0,b3), (a0,b4), (a1,b3), (a1,b4), (a2,b3), (a2,b4)}. Effective-options: NOTHREADNG. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00695">695</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00696">696</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -716,7 +716,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Assigns a ranking to key-value pairs, and returns the number of the total elements in COUNT. </p>
 <p>Ranking is a position in the key-value stream. That is, for example, given a sequence {(k0,v0), (k1,v1), (k2,v2)}, it creates {(0,(k0,v0)), (1,(k1,v1)), (2,(k2,v2))}. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00763">763</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00764">764</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -759,7 +759,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Distributes key-value pairs approximately evenly to ranks. </p>
 <p>It is used to level the load of mapping among ranks by calling it before mapping. <a class="el" href="kmr_8h.html#a194686701b3c46a869fe9eb2cab93252" title="Shuffles key-value pairs to the appropriate destination ranks. ">kmr_shuffle()</a> can be sufficient to distribute pairs in most cases, but sometimes it results in uneven distribution because shuffling is based on hashing on the keys. Effective-options: NOTHREADING, INSPECT, KEEP_OPEN. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00834">834</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00835">835</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -802,7 +802,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Chooses the first N entries from a key-value stream KVI. </p>
 <p>The option nothreading is implied to keep the ordering. Effective-options: INSPECT, KEEP_OPEN. See struct <a class="el" href="structkmr__option.html" title="Options to Mapping, Shuffling, and Reduction. ">kmr_option</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00887">887</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00888">888</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -851,7 +851,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Maps until some key-value are added. </p>
 <p>It stops processing, when the output is non-empty. It does not guarantee singleness. Existence/emptiness be checked by <a class="el" href="kmrmoreops_8c.html#a161eaf42b3fb2855b6186ccf41fc72ab" title="Gets the total number of key-value pairs. ">kmr_get_element_count()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00912">912</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00913">913</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -900,7 +900,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Reduces until some key-value are added. </p>
 <p>It stops processing, when the output is non-empty. It does not guarantee singleness. Existence/emptiness be checked by <a class="el" href="kmrmoreops_8c.html#a161eaf42b3fb2855b6186ccf41fc72ab" title="Gets the total number of key-value pairs. ">kmr_get_element_count()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00925">925</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00926">926</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -931,7 +931,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Returns an NTH entry of an n-tuple. </p>
 <p>It returns a pair of a length and a pointer. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00939">939</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00940">940</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -951,7 +951,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 
 <p>Returns the storage size of an n-tuple. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00953">953</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00954">954</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -981,7 +981,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 
 <p>Returns the storage size of an n-tuple for N entries with LEN[i] size each. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00963">963</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00964">964</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1017,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 
 <p>Resets an n-tuple U with N entries and a MARKER. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00976">976</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00977">977</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1066,7 +1066,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Adds an entry V with LEN in an n-tuple U whose size is limited to SIZE. </p>
 <p>An n-tuple should be initialized by <a class="el" href="kmrmoreops_8c.html#af0ae0218d80610afda9c102dc3d19203" title="Resets an n-tuple U with N entries and a MARKER. ">kmr_reset_ntuple()</a> first. Note it fills with zeros the gap of the alignment padding, allowing the n-tuples be used as opaque keys. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00994">994</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l00995">995</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1109,7 +1109,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Adds an integer value in an n-tuple U whose size is limited to SIZE. </p>
 <p>See <a class="el" href="kmrmoreops_8c.html#a5b7f6b32ff70600389005fb8cf85939c" title="Adds an entry V with LEN in an n-tuple U whose size is limited to SIZE. ">kmr_put_ntuple()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01016">1016</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01017">1017</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1152,7 +1152,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Adds an n-tuple entry E in an n-tuple U whose size is limited to SIZE. </p>
 <p>See <a class="el" href="kmrmoreops_8c.html#a5b7f6b32ff70600389005fb8cf85939c" title="Adds an entry V with LEN in an n-tuple U whose size is limited to SIZE. ">kmr_put_ntuple()</a>. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01026">1026</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01027">1027</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1194,7 +1194,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 
 <p>Adds an n-tuple U with a given key K and KLEN in a key-value stream KVO. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01037">1037</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01038">1038</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1255,7 +1255,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Separates the n-tuples stored in the value part of KV into the two sets by their marker values. </p>
 <p>It is intended to be used in reduce functions. It separates the n-tuples to the first set by marker=MARKERS[0] and to the second set by marker=MARKERS[1]. It returns two malloced arrays in VV with their sizes in CNT. The arrays VV[0] and VV[1] should be freed by the caller. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01060">1060</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01061">1061</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1322,7 +1322,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Makes a direct product of the two sets of n-tuples VV[0] and VV[1] with their counts in CNT[0] and CNT[1]. </p>
 <p>It is intended to be used in reduce functions. The resulting n-tuples are created by SLOTS, which chooses i-th entry of the n-tuples by the SLOTS[i][0]-th entry from the the SLOTS[i][1] set, 0 from the first set and 1 from the second set. The product n-tuples have MARKER and are inserted into KVO under the new key. The new key is selected like values using KEYS[j][0] and KEYS[j][1]. The key is not an n-tuple when NKEYS=1, or an n-tuple of KEYS[j] entries. The n-tuple key has zero as a marker. Note that it does not remove duplicate entries. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01270">1270</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01271">1271</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
@@ -1365,14 +1365,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>kmr_unpairing_fn</b> (
 <p>Fills an integer array FRQ[i] with the count of the elements of each rank. </p>
 <p>The array FRQ be as large as nprocs. It also fills VAR[0]=average, VAR[1]=variance, VAR[2]=min, and VAR[3]=max. FRQ or VAR can be null. </p>
 
-<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01311">1311</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
+<p>Definition at line <a class="el" href="kmrmoreops_8c_source.html#l01312">1312</a> of file <a class="el" href="kmrmoreops_8c_source.html">kmrmoreops.c</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 22 2015 18:25:26 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 29 2015 13:40:46 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

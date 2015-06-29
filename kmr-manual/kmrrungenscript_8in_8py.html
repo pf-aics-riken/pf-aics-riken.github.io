@@ -99,12 +99,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7c5ae46968da793df2131521b3fdc312"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.checkexist</b> (path)</td></tr>
-<tr class="memdesc:a7c5ae46968da793df2131521b3fdc312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks file existence.  <a href="#a7c5ae46968da793df2131521b3fdc312">More...</a><br /></td></tr>
-<tr class="separator:a7c5ae46968da793df2131521b3fdc312"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a428822461608dc9aed64880d50a3d15d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.checkrestart</b> (restart_basename, procstr, sched)</td></tr>
-<tr class="memdesc:a428822461608dc9aed64880d50a3d15d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check restart mode.  <a href="#a428822461608dc9aed64880d50a3d15d">More...</a><br /></td></tr>
-<tr class="separator:a428822461608dc9aed64880d50a3d15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c07a55f1eb6e51414b0f4afc7cba924"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.check_cmdline</b> (cmdline, sched)</td></tr>
+<tr class="memdesc:a0c07a55f1eb6e51414b0f4afc7cba924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if command in the specified command line exists.  <a href="#a0c07a55f1eb6e51414b0f4afc7cba924">More...</a><br /></td></tr>
+<tr class="separator:a0c07a55f1eb6e51414b0f4afc7cba924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e8a08b90e1d3f2dd284f1f4481704ed"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.check_indir</b> (dirname, sched)</td></tr>
+<tr class="memdesc:a6e8a08b90e1d3f2dd284f1f4481704ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if command in the specified command line exists.  <a href="#a6e8a08b90e1d3f2dd284f1f4481704ed">More...</a><br /></td></tr>
+<tr class="separator:a6e8a08b90e1d3f2dd284f1f4481704ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59334fdb7e9dfbdb65f14d613912530e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.check_restart</b> (restart_basename, procstr, sched)</td></tr>
+<tr class="memdesc:a59334fdb7e9dfbdb65f14d613912530e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check restart mode.  <a href="#a59334fdb7e9dfbdb65f14d613912530e">More...</a><br /></td></tr>
+<tr class="separator:a59334fdb7e9dfbdb65f14d613912530e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac683cae03beed2d9001e748906704a57"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.focus_scheduler</b> (name, queue, rsctime, node, kmrrun_path, kmrrun_parameter, template_path)</td></tr>
 <tr class="memdesc:ac683cae03beed2d9001e748906704a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates job-script for FOCUS supercomputer.  <a href="#ac683cae03beed2d9001e748906704a57">More...</a><br /></td></tr>
 <tr class="separator:ac683cae03beed2d9001e748906704a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,9 +120,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a7a5638298f252fe741ec33ac1db8893a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.select_scheduler</b> (opts, sched)</td></tr>
 <tr class="memdesc:a7a5638298f252fe741ec33ac1db8893a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects job-scheduler.  <a href="#a7a5638298f252fe741ec33ac1db8893a">More...</a><br /></td></tr>
 <tr class="separator:a7a5638298f252fe741ec33ac1db8893a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af848c8c524e9671a622a1c5dd1d13790"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.update_execpath</b> (cmd)</td></tr>
-<tr class="memdesc:af848c8c524e9671a622a1c5dd1d13790"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update command path.  <a href="#af848c8c524e9671a622a1c5dd1d13790">More...</a><br /></td></tr>
-<tr class="separator:af848c8c524e9671a622a1c5dd1d13790"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac8ebe27e069ebf8fbfb689b91763ab"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.warn_stageout</b> (opts)</td></tr>
 <tr class="memdesc:adac8ebe27e069ebf8fbfb689b91763ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Warn to write Stage-out section.  <a href="#adac8ebe27e069ebf8fbfb689b91763ab">More...</a><br /></td></tr>
 <tr class="separator:adac8ebe27e069ebf8fbfb689b91763ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,7 +161,7 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>kmrrungenscript.typ
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 22 2015 18:25:26 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 29 2015 13:40:46 for KMR by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
