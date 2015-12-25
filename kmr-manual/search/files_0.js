@@ -23,6 +23,8 @@ var searchData=
   ['kmrshell_2ec',['kmrshell.c',['../kmrshell_8c.html',1,'']]],
   ['kmrshell_5fmpi_2ec',['kmrshell_mpi.c',['../kmrshell__mpi_8c.html',1,'']]],
   ['kmrshuffler_2ec',['kmrshuffler.c',['../kmrshuffler_8c.html',1,'']]],
+  ['kmrtrace_2ec',['kmrtrace.c',['../kmrtrace_8c.html',1,'']]],
+  ['kmrtrace_2eh',['kmrtrace.h',['../kmrtrace_8h.html',1,'']]],
   ['kmrutil_2ec',['kmrutil.c',['../kmrutil_8c.html',1,'']]],
   ['kmrwatch0_2ec',['kmrwatch0.c',['../kmrwatch0_8c.html',1,'']]],
   ['kmrwrapper_2epy',['kmrwrapper.py',['../kmrwrapper_8py.html',1,'']]]

@@ -83,6 +83,8 @@ var searchData=
   ['kmr_5fspawning',['kmr_spawning',['../structkmr__spawning.html',1,'']]],
   ['kmr_5fstrint',['kmr_strint',['../interfacekmrf_1_1kmr__strint.html',1,'kmrf']]],
   ['kmr_5fstrptr',['kmr_strptr',['../interfacekmrf_1_1kmr__strptr.html',1,'kmrf']]],
+  ['kmr_5ftrace',['kmr_trace',['../structkmr__trace.html',1,'']]],
+  ['kmr_5ftrace_5fentry',['kmr_trace_entry',['../structkmr__trace__entry.html',1,'']]],
   ['kmr_5funit_5fsized',['kmr_unit_sized',['../unionkmr__unit__sized.html',1,'']]],
   ['kv_5fposition',['kv_position',['../structkv__position.html',1,'']]]
 ];
