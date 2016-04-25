@@ -15,6 +15,7 @@ kmr4py._c_mapfn_restype	kmr4py-module.html#_c_mapfn_restype
 kmr4py._c_kvs	kmr4py-module.html#_c_kvs
 kmr4py._enabled_options_of_reduce_as_one	kmr4py-module.html#_enabled_options_of_reduce_as_one
 kmr4py._c_boxvec	kmr4py-module.html#_c_boxvec
+kmr4py._check_passing_options	kmr4py-module.html#_check_passing_options
 kmr4py._c_uint	kmr4py-module.html#_c_uint
 kmr4py._kv_bad	kmr4py-module.html#_kv_bad
 kmr4py.ignore_exceptions_in_map_fn	kmr4py-module.html#ignore_exceptions_in_map_fn
@@ -28,7 +29,7 @@ kmr4py.warning_function	kmr4py-module.html#warning_function
 kmr4py._c_long	kmr4py-module.html#_c_long
 kmr4py._c_uint64	kmr4py-module.html#_c_uint64
 kmr4py._c_string	kmr4py-module.html#_c_string
-kmr4py._check_passing_options	kmr4py-module.html#_check_passing_options
+kmr4py._enabled_options_of_map_once	kmr4py-module.html#_enabled_options_of_map_once
 kmr4py.fin	kmr4py-module.html#fin
 kmr4py.print_backtrace_in_map_fn	kmr4py-module.html#print_backtrace_in_map_fn
 kmr4py._enabled_options_of_map	kmr4py-module.html#_enabled_options_of_map
@@ -53,7 +54,7 @@ kmr4py._field_type_name_map	kmr4py-module.html#_field_type_name_map
 kmr4py._c_uint32	kmr4py-module.html#_c_uint32
 kmr4py._setup_mpi_constants	kmr4py-module.html#_setup_mpi_constants
 kmr4py._field_name_type_map	kmr4py-module.html#_field_name_type_map
-kmr4py._enabled_options_of_map_once	kmr4py-module.html#_enabled_options_of_map_once
+kmr4py._c_uint8	kmr4py-module.html#_c_uint8
 kmr4py._c_kvsvec	kmr4py-module.html#_c_kvsvec
 kmr4py._MKREDFN	kmr4py-module.html#_MKREDFN
 kmr4py._enabled_options_of_shuffle	kmr4py-module.html#_enabled_options_of_shuffle
